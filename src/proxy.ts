@@ -1,10 +1,14 @@
 import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 
-// This matches everything EXCEPT the homepage (/)
-const isPublicRoute = createRouteMatcher(["/"]);
+// 1. Define routes that should be accessible without logging in
+const isPublicRoute = createRouteMatcher([
+  "/", // Homepage
+  "/sign-in(.*)", // Sign-in page and sub-routes
+  "/sign-up(.*)", // Sign-up page and sub-routes
+]);
 
 export default clerkMiddleware(async (auth, req) => {
-  // If the route is NOT public, protect it
+  // 2. If the user is NOT on a public route, protect it
   if (!isPublicRoute(req)) {
     await auth.protect();
   }
@@ -12,7 +16,9 @@ export default clerkMiddleware(async (auth, req) => {
 
 export const config = {
   matcher: [
+    // Skip Next.js internals and all static files
     "/((?!_next|[^?]*\\.(?:html?|css|js(?!on)|jpe?g|webp|png|gif|svg|ttf|woff2?|ico|csv|docx?|xlsx?|zip|webmanifest)).*)",
+    // Always run for API routes
     "/(api|trpc)(.*)",
   ],
 };
