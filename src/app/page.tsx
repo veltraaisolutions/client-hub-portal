@@ -1,6 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import Link from "next/link";
+import { Show } from "@clerk/nextjs";
 import { ArrowRight, Shield, Activity, Zap } from "lucide-react";
 
 export default function LandingPage() {
@@ -29,22 +30,33 @@ export default function LandingPage() {
           </p>
 
           <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-zinc-200 px-10 h-14 text-base font-semibold rounded-sm w-full sm:w-auto"
-              asChild
-            >
-              <Link href="/sign-up">
-                Open Account <ArrowRight className="ml-2 h-4 w-4" />
-              </Link>
-            </Button>
-            <Button
-              size="lg"
-              className="bg-white text-black hover:bg-zinc-200 px-10 h-14 text-base font-semibold rounded-sm w-full sm:w-auto"
-              asChild
-            >
-              <Link href="/login">Portal Login</Link>
-            </Button>
+            {/* DYNAMIC BUTTON LOGIC */}
+
+            {/* Show this if user is NOT signed in */}
+            <Show when="signed-out">
+              <Button
+                size="lg"
+                className="bg-white text-black hover:bg-zinc-200 px-10 h-14 text-base font-semibold rounded-sm w-full sm:w-auto"
+                asChild
+              >
+                <Link href="/sign-up">
+                  Get Started <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </Show>
+
+            {/* Show this if user IS signed in */}
+            <Show when="signed-in">
+              <Button
+                size="lg"
+                className="bg-white text-black hover:bg-zinc-200 px-10 h-14 text-base font-semibold rounded-sm w-full sm:w-auto"
+                asChild
+              >
+                <Link href="/dashboard">
+                  Go to Dashboard <ArrowRight className="ml-2 h-4 w-4" />
+                </Link>
+              </Button>
+            </Show>
           </div>
         </div>
       </section>
