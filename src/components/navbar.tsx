@@ -2,7 +2,14 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Show, UserButton } from "@clerk/nextjs";
+import {
+  Show,
+  UserButton,
+  ClerkLoading,
+  ClerkLoaded,
+  ClerkDegraded,
+  ClerkFailed,
+} from "@clerk/nextjs";
 
 export default function Navbar() {
   return (
@@ -16,51 +23,77 @@ export default function Navbar() {
           ASSET<span className="text-zinc-500">CORE</span>
         </Link>
 
-        {/* Dynamic Auth Section */}
+        {/* Auth Section */}
         <div className="flex items-center gap-4">
-          {/* Visible ONLY when logged out */}
-          <Show when="signed-out">
-            <Link href="/sign-in">
-              <Button
-                variant="ghost"
-                className="text-zinc-400 hover:text-white hover:bg-zinc-900 font-medium"
-              >
-                Sign In
-              </Button>
-            </Link>
+          {/* 1. LOADING STATE: Renders while Clerk is initializing */}
+          <ClerkLoading>
+            <div className="flex items-center gap-4">
+              {/* Pulse skeleton for Dashboard link */}
+              <div className="h-4 w-20 bg-zinc-800 rounded animate-pulse hidden md:block" />
+              {/* Pulse skeleton for Avatar */}
+              <div className="h-9 w-9 bg-zinc-800 rounded-full animate-pulse border border-white/5" />
+            </div>
+          </ClerkLoading>
 
-            <Link href="/sign-up">
-              <Button className="bg-white text-black hover:bg-zinc-200 rounded-sm px-6 font-semibold shadow-sm">
-                Get Started
-              </Button>
-            </Link>
-          </Show>
-
-          {/* Visible ONLY when logged in */}
-          <Show when="signed-in">
-            <div className="flex items-center gap-6">
-              <Link
-                href="/dashboard"
-                className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
-              >
-                Dashboard
+          {/* 2. LOADED STATE: Renders when Clerk is ready or degraded */}
+          <ClerkLoaded>
+            {/* Show these if the user is NOT signed in */}
+            <Show when="signed-out">
+              <Link href="/sign-in">
+                <Button
+                  variant="ghost"
+                  className="text-zinc-400 hover:text-white hover:bg-zinc-900 font-medium"
+                >
+                  Sign In
+                </Button>
               </Link>
 
-              {/* This component shows the user's profile picture and a logout menu */}
-              <UserButton
-                appearance={{
-                  elements: {
-                    userButtonAvatarBox:
-                      "h-9 w-9 border border-white/10 hover:border-white/20 transition-all",
-                    userButtonPopoverCard:
-                      "bg-zinc-950 border border-white/10 text-white",
-                    userButtonPopoverActionButtonText: "text-zinc-400",
-                    userButtonPopoverFooter: "hidden", // Optional: hides the "Powered by Clerk" link
-                  },
-                }}
-              />
+              <Link href="/sign-up">
+                <Button className="bg-white text-black hover:bg-zinc-200 rounded-sm px-6 font-semibold shadow-sm">
+                  Get Started
+                </Button>
+              </Link>
+            </Show>
+
+            {/* Show these if the user IS signed in */}
+            <Show when="signed-in">
+              <div className="flex items-center gap-6">
+                <Link
+                  href="/dashboard"
+                  className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                >
+                  Dashboard
+                </Link>
+
+                <UserButton
+                  appearance={{
+                    elements: {
+                      userButtonAvatarBox:
+                        "h-9 w-9 border border-white/10 hover:border-white/20 transition-all",
+                      userButtonPopoverCard:
+                        "bg-zinc-950 border border-white/10 text-white",
+                      userButtonPopoverActionButtonText: "text-zinc-400",
+                      userButtonPopoverFooter: "hidden",
+                    },
+                  }}
+                />
+              </div>
+            </Show>
+
+            {/* DEGRADED STATE: Optional subtle warning if Clerk is slow */}
+            <ClerkDegraded>
+              <div className="text-[10px] text-yellow-500/50 uppercase tracking-widest px-2">
+                Slow Connection
+              </div>
+            </ClerkDegraded>
+          </ClerkLoaded>
+
+          {/* 3. FAILED STATE: Renders if Clerk fails to load entirely */}
+          <ClerkFailed>
+            <div className="text-[10px] text-red-500 uppercase tracking-widest px-2 font-bold">
+              System Offline
             </div>
-          </Show>
+          </ClerkFailed>
         </div>
       </div>
     </nav>
