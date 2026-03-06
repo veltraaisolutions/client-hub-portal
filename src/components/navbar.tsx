@@ -40,7 +40,7 @@ export default function Navbar() {
           <Show when="signed-in">
             <div className="flex items-center gap-6">
               <Link
-                href="/dashboared"
+                href="/dashboard"
                 className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
               >
                 Dashboard
