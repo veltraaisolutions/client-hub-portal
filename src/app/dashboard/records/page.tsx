@@ -1,8 +1,8 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { supabase } from "@/lib/supabase"; // ✅ Shared DB
+import { supabase } from "@/lib/supabase";
 import { AddAssetModal } from "@/components/add-asset-modal";
 import { TrashActions } from "@/components/trash-actions";
-import { Inbox, Edit2 } from "lucide-react";
+import { Inbox } from "lucide-react";
 
 export default async function RecordsPage({
   searchParams,
@@ -17,10 +17,17 @@ export default async function RecordsPage({
   const isMaster = userId === MASTER_USER_ID;
 
   const userEmail = user?.primaryEmailAddress?.emailAddress;
-  const targetEmail = isMaster && params.email ? params.email : userEmail;
+
+  /** *
+   * If an email is in the URL (?email=...), use it.
+   * Otherwise, fall back to the logged-in user's email.
+   */
+  const targetEmail = params.email || userEmail;
 
   // Fetching data
   let query = supabase.from("investments").select("*");
+
+  //  Only filter if we actually have an email to filter by
   if (targetEmail) {
     query = query.eq("assigned_email", targetEmail);
   }
@@ -28,6 +35,7 @@ export default async function RecordsPage({
   const { data: records } = await query.order("created_at", {
     ascending: false,
   });
+
   const isEmpty = !records || records.length === 0;
 
   return (
@@ -35,9 +43,11 @@ export default async function RecordsPage({
       <header className="flex justify-between items-end border-b border-border pb-8">
         <div className="space-y-2">
           <p className="text-primary text-[10px] uppercase tracking-widest font-bold">
-            {isMaster
-              ? `Administering: ${targetEmail}`
-              : "Institutional Ledger"}
+            {isMaster && params.email
+              ? `Administering Client: ${targetEmail}`
+              : isMaster
+                ? "Master Ledger (Global)"
+                : "Institutional Ledger"}
           </p>
           <h1 className="text-4xl font-bold tracking-tight text-foreground">
             Investment{" "}
@@ -48,6 +58,8 @@ export default async function RecordsPage({
         {isMaster && (
           <AddAssetModal
             userId={userId!}
+            // s Passing targetEmail here ensures new entries
+            // inherit the email you are currently viewing.
             initialEmail={targetEmail || ""}
           />
         )}
@@ -90,11 +102,10 @@ export default async function RecordsPage({
                   <td className="p-4 text-right pr-8 flex items-center justify-end gap-2">
                     {isMaster ? (
                       <>
-                        {/* Edit Button - Reusing AddAssetModal logic */}
                         <AddAssetModal
                           userId={userId!}
                           initialEmail={item.assigned_email}
-                          editData={item} // ✅ Passing existing data to pre-fill
+                          editData={item}
                         />
                         <TrashActions
                           id={item.id}
@@ -117,7 +128,7 @@ export default async function RecordsPage({
                 >
                   <Inbox className="size-8 mx-auto text-muted-foreground/40 mb-4" />
                   <p className="text-sm font-bold uppercase">
-                    No Assets Detected
+                    No Assets Detected for {targetEmail}
                   </p>
                 </td>
               </tr>
