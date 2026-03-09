@@ -8,6 +8,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/navbar";
 import "./globals.css";
 import { Footer } from "@/components/footer";
+import { Toaster } from "sonner";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -36,7 +37,11 @@ export default function RootLayout({
             {!isDashboard && <Navbar />}
 
             <main>{children}</main>
-
+            <Toaster
+              position="bottom-right"
+              richColors
+              closeButton
+            />
             {!isDashboard && <Footer />}
           </TooltipProvider>
         </body>

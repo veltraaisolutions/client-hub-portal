@@ -1,8 +1,7 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
 import { createClient } from "@supabase/supabase-js";
-import { MOCK_STATS } from "@/data/mock-records";
 
-export default async function DashboardPage() {
+export default async function OverviewPage() {
   const { userId } = await auth();
   const user = await currentUser();
 
@@ -11,70 +10,62 @@ export default async function DashboardPage() {
     process.env.SUPABASE_SERVICE_ROLE_KEY!,
   );
 
-  const { data: profile } = await supabase
-    .from("profiles")
-    .upsert(
-      {
-        clerk_id: userId,
-        email: user?.emailAddresses[0].emailAddress,
-        full_name: `${user?.firstName ?? ""} ${user?.lastName ?? ""}`.trim(),
-      },
-      { onConflict: "clerk_id" },
-    )
-    .select()
-    .single();
+  const { data: investments } = await supabase
+    .from("investments")
+    .select("amount")
+    .eq("user_id", userId);
 
-  const memberSince = profile
-    ? new Date(profile.created_at).toLocaleDateString("en-GB", {
-        day: "2-digit",
-        month: "long",
-        year: "numeric",
-      })
-    : "09 March 2026";
+  const totalValue =
+    investments?.reduce((sum, inv) => sum + Number(inv.amount), 0) || 0;
+  const activeAssets = investments?.length || 0;
+
+  // Format the "Verified Since" date
+  // eslint-disable-next-line react-hooks/purity
+  const joinDate = new Date(user?.createdAt || Date.now()).toLocaleDateString(
+    "en-GB",
+    {
+      day: "2-digit",
+      month: "long",
+      year: "numeric",
+    },
+  );
 
   return (
-    <div className="p-8 space-y-12 max-w-7xl mx-auto bg-background text-foreground">
-      {/* HEADER SECTION */}
-      <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
+    <div className="p-8 space-y-12 max-w-7xl mx-auto bg-background min-h-screen">
+      <header className="flex justify-between items-start">
         <div className="space-y-2">
           <p className="text-primary text-[10px] uppercase tracking-[0.3em] font-bold">
             AssetCore Global Command
           </p>
-          <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-foreground italic">
+          <h1 className="text-5xl font-medium tracking-tight text-foreground italic">
             Welcome back,{" "}
-            <span className="not-italic font-bold">
-              {profile?.full_name?.split(" ")[0]}
-            </span>
+            <span className="not-italic font-bold">{user?.firstName}</span>
           </h1>
         </div>
-
-        <div className="text-left md:text-right space-y-1">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
-            Account Verified Since
+        <div className="text-right hidden md:block">
+          <p className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+            Member Since
           </p>
-          <p className="text-sm font-medium text-foreground">{memberSince}</p>
+          <p className="text-sm font-bold text-foreground">{joinDate}</p>
+          <p className="text-[9px] text-muted-foreground font-medium uppercase">
+            ID: {userId?.slice(-12)}
+          </p>
         </div>
       </header>
 
-      {/* STATS GRID */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard
           label="Total Portfolio Value"
-          value={`$${MOCK_STATS.totalPortfolio.toLocaleString()}`}
+          value={`$${totalValue.toLocaleString()}`}
           isPrimary
         />
         <StatCard
           label="Active Assets"
-          value={MOCK_STATS.activeAssets}
+          value={activeAssets}
         />
         <StatCard
           label="Monthly Dividends"
-          value={`$${MOCK_STATS.monthlyDividends}`}
-        />
-        <StatCard
-          label="Pending Requests"
-          value={MOCK_STATS.pendingRequests}
-          isWarning={Number(MOCK_STATS.pendingRequests) > 0}
+          value={`$${(totalValue * 0.007).toLocaleString(undefined, { maximumFractionDigits: 2 })}`}
         />
       </div>
     </div>
@@ -84,34 +75,24 @@ export default async function DashboardPage() {
 function StatCard({
   label,
   value,
-  isPrimary = false,
-  isWarning = false,
+  isPrimary,
 }: {
   label: string;
   value: string | number;
   isPrimary?: boolean;
-  isWarning?: boolean;
 }) {
   return (
     <div
-      className={`p-8 rounded-none border ${isPrimary ? "border-primary bg-primary/5" : "border-border bg-card"} shadow-sm transition-all hover:shadow-md`}
+      className={`p-8 border ${isPrimary ? "border-primary shadow-lg shadow-primary/5" : "border-border"} bg-card space-y-4`}
     >
-      <p className="text-muted-foreground text-[10px] uppercase tracking-[0.2em] font-bold mb-4">
+      <p className="text-[10px] font-bold text-muted-foreground uppercase tracking-widest">
         {label}
       </p>
       <p
-        className={`text-3xl font-bold tracking-tighter ${isPrimary ? "text-primary" : "text-foreground"}`}
+        className={`text-4xl font-bold tracking-tighter ${isPrimary ? "text-primary" : "text-foreground"}`}
       >
         {value}
       </p>
-      {isWarning && (
-        <div className="mt-4 flex items-center gap-2">
-          <div className="size-1.5 rounded-full bg-amber-500 animate-pulse" />
-          <span className="text-[9px] font-bold uppercase tracking-widest text-amber-600">
-            Action Required
-          </span>
-        </div>
-      )}
     </div>
   );
 }
