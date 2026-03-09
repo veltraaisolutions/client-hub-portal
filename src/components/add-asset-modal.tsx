@@ -13,6 +13,16 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 
+// ✅ Define interface to fix TS errors
+interface Investment {
+  id: string;
+  asset_name: string;
+  assigned_email: string;
+  amount: number;
+  asset_type: string;
+  status: string;
+}
+
 export function AddAssetModal({
   userId,
   initialEmail,
@@ -20,7 +30,7 @@ export function AddAssetModal({
 }: {
   userId: string;
   initialEmail: string;
-  editData?: any;
+  editData?: Investment; // ✅ Replaced 'any'
 }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -33,27 +43,24 @@ export function AddAssetModal({
 
     const formData = new FormData(e.currentTarget);
 
-    // Construct payload - Note: 'id' is intentionally omitted here for Inserts
     const payload = {
-      asset_name: formData.get("assetName"),
-      assigned_email: formData.get("assignedEmail"),
+      asset_name: formData.get("assetName") as string,
+      assigned_email: formData.get("assignedEmail") as string,
       amount: Number(formData.get("amount")),
-      asset_type: formData.get("type"),
+      asset_type: formData.get("type") as string,
       status: "Active",
       user_id: userId,
     };
 
-    // Validation: Ensure amount is a valid number
     if (isNaN(payload.amount)) {
       toast.error("Invalid amount entered");
       setLoading(false);
       return;
     }
 
-    // Direct operation based on mode
     const { error } = isEditing
       ? await supabase.from("investments").update(payload).eq("id", editData.id)
-      : await supabase.from("investments").insert([payload]); // Wrapped in array for insert safety
+      : await supabase.from("investments").insert([payload]);
 
     if (error) {
       console.error("Supabase Error:", error);
@@ -75,7 +82,7 @@ export function AddAssetModal({
     >
       <DialogTrigger asChild>
         {isEditing ? (
-          <button className="p-2 text-muted-foreground hover:text-primary transition-colors group-hover:opacity-100 opacity-0">
+          <button className="p-2 text-muted-foreground hover:text-primary transition-colors">
             <Edit2 className="size-4" />
           </button>
         ) : (
@@ -88,7 +95,6 @@ export function AddAssetModal({
       <DialogContent className="rounded-none border-none max-w-md bg-white p-0 shadow-2xl">
         <div className="h-2 bg-primary w-full" />
 
-        {/* Screen Reader Description - Fixes the Dialog Warning */}
         <div className="sr-only">
           <DialogDescription>
             Management interface for authorizing new assets or updating existing
@@ -115,9 +121,21 @@ export function AddAssetModal({
                   isEditing ? editData.assigned_email : initialEmail
                 }
                 required
+                // ✅ Lock field during edit
+                readOnly={isEditing}
+                disabled={isEditing}
                 placeholder="client@example.com"
-                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                className={`w-full border-b border-border py-2 text-sm font-medium outline-none transition-colors bg-transparent ${
+                  isEditing
+                    ? "opacity-50 cursor-not-allowed border-dashed"
+                    : "focus:border-primary"
+                }`}
               />
+              {isEditing && (
+                <p className="text-[9px] text-amber-600 font-medium uppercase mt-1 tracking-tight">
+                  Email is locked to Client Identity
+                </p>
+              )}
             </div>
 
             <div className="space-y-1">
