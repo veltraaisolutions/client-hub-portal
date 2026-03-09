@@ -13,7 +13,6 @@ import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { supabase } from "@/lib/supabase";
 
-// ✅ Define interface to fix TS errors
 interface Investment {
   id: string;
   asset_name: string;
@@ -30,7 +29,7 @@ export function AddAssetModal({
 }: {
   userId: string;
   initialEmail: string;
-  editData?: Investment; // ✅ Replaced 'any'
+  editData?: Investment;
 }) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
@@ -43,36 +42,56 @@ export function AddAssetModal({
 
     const formData = new FormData(e.currentTarget);
 
+    // ✅ Clean values and ensure they are strings/numbers
     const payload = {
-      asset_name: formData.get("assetName") as string,
-      assigned_email: formData.get("assignedEmail") as string,
-      amount: Number(formData.get("amount")),
-      asset_type: formData.get("type") as string,
+      asset_name: (formData.get("assetName")?.toString() || "").trim(),
+      assigned_email: (formData.get("assignedEmail")?.toString() || "").trim(),
+      amount: Number(formData.get("amount")) || 0,
+      asset_type: formData.get("type")?.toString() || "Equity",
       status: "Active",
-      user_id: userId,
+      user_id: userId || "", // Ensure this is never undefined
     };
 
-    if (isNaN(payload.amount)) {
-      toast.error("Invalid amount entered");
+    // ✅ Debug Logging
+    console.log("Submit Payload:", payload);
+    console.log("Operation Mode:", isEditing ? "UPDATE" : "INSERT");
+
+    if (!payload.user_id) {
+      toast.error("User Identity missing. Please re-login.");
       setLoading(false);
       return;
     }
 
-    const { error } = isEditing
-      ? await supabase.from("investments").update(payload).eq("id", editData.id)
-      : await supabase.from("investments").insert([payload]);
-
-    if (error) {
-      console.error("Supabase Error:", error);
-      toast.error(error.message || "Operation Failed");
+    if (isNaN(payload.amount) || payload.amount <= 0) {
+      toast.error("Please enter a valid amount");
       setLoading(false);
       return;
     }
 
-    toast.success(isEditing ? "Entry Updated" : "Asset Authorized");
-    setOpen(false);
-    setLoading(false);
-    router.refresh();
+    try {
+      const { data, error } = isEditing
+        ? await supabase
+            .from("investments")
+            .update(payload)
+            .eq("id", editData.id)
+            .select()
+        : await supabase.from("investments").insert([payload]).select();
+
+      if (error) {
+        console.error("Supabase Error Object:", error);
+        toast.error(error.message || "Database Operation Failed");
+      } else {
+        console.log("Operation Success. Result:", data);
+        toast.success(isEditing ? "Entry Updated" : "Asset Authorized");
+        setOpen(false);
+        router.refresh();
+      }
+    } catch (err) {
+      console.error("System Error caught during submission:", err);
+      toast.error("Failed to execute request. Check browser console.");
+    } finally {
+      setLoading(false);
+    }
   }
 
   return (
@@ -94,12 +113,8 @@ export function AddAssetModal({
 
       <DialogContent className="rounded-none border-none max-w-md bg-white p-0 shadow-2xl">
         <div className="h-2 bg-primary w-full" />
-
         <div className="sr-only">
-          <DialogDescription>
-            Management interface for authorizing new assets or updating existing
-            ledger records.
-          </DialogDescription>
+          <DialogDescription>Asset management interface.</DialogDescription>
         </div>
 
         <form
@@ -121,19 +136,18 @@ export function AddAssetModal({
                   isEditing ? editData.assigned_email : initialEmail
                 }
                 required
-                // ✅ Lock field during edit
+                // ✅ Locked field during edit
                 readOnly={isEditing}
-                disabled={isEditing}
                 placeholder="client@example.com"
                 className={`w-full border-b border-border py-2 text-sm font-medium outline-none transition-colors bg-transparent ${
                   isEditing
-                    ? "opacity-50 cursor-not-allowed border-dashed"
+                    ? "opacity-60 cursor-not-allowed border-dashed"
                     : "focus:border-primary"
                 }`}
               />
               {isEditing && (
-                <p className="text-[9px] text-amber-600 font-medium uppercase mt-1 tracking-tight">
-                  Email is locked to Client Identity
+                <p className="text-[9px] text-amber-600 font-medium uppercase mt-1">
+                  Identity locked for existing record
                 </p>
               )}
             </div>
@@ -159,6 +173,7 @@ export function AddAssetModal({
                 <input
                   name="amount"
                   type="number"
+                  step="0.01"
                   defaultValue={isEditing ? editData.amount : ""}
                   required
                   placeholder="0.00"
@@ -188,10 +203,10 @@ export function AddAssetModal({
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary text-white font-black py-5 uppercase text-[11px] tracking-[0.2em] hover:bg-zinc-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-primary text-white font-black py-5 uppercase text-[11px] tracking-[0.2em] hover:bg-zinc-900 transition-all disabled:opacity-50"
             >
               {loading
-                ? "Syncing with Ledger..."
+                ? "Processing..."
                 : isEditing
                   ? "Update Record"
                   : "Confirm & Deploy"}
