@@ -1,11 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL?.trim();
+const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY?.trim();
 
-// Fail early if variables are missing in Vercel settings
 if (!supabaseUrl || !supabaseAnonKey) {
-  console.error("CRITICAL: Supabase environment variables are missing!");
+  console.error("Missing Supabase Keys - Check Vercel Environment Variables");
 }
 
 export const supabase = createClient(supabaseUrl || "", supabaseAnonKey || "");
