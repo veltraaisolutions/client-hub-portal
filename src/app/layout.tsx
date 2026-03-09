@@ -3,10 +3,11 @@
 import { usePathname } from "next/navigation";
 import { Geist, Geist_Mono } from "next/font/google";
 import { ClerkProvider } from "@clerk/nextjs";
-import { dark } from "@clerk/themes";
+
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Navbar from "@/components/navbar";
 import "./globals.css";
+import { Footer } from "@/components/footer";
 
 const geistSans = Geist({ variable: "--font-geist-sans", subsets: ["latin"] });
 const geistMono = Geist_Mono({
@@ -23,18 +24,20 @@ export default function RootLayout({
   const isDashboard = pathname.startsWith("/dashboard");
 
   return (
-    <ClerkProvider appearance={{ baseTheme: dark }}>
+    <ClerkProvider>
       <html
         lang="en"
-        className="dark"
+        suppressHydrationWarning
       >
         <body
-          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-black text-white`}
+          className={`${geistSans.variable} ${geistMono.variable} antialiased bg-background text-foreground`}
         >
           <TooltipProvider>
             {!isDashboard && <Navbar />}
 
             <main>{children}</main>
+
+            {!isDashboard && <Footer />}
           </TooltipProvider>
         </body>
       </html>

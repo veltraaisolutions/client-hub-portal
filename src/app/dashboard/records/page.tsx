@@ -2,58 +2,79 @@ import { MOCK_RECORDS } from "@/data/mock-records";
 
 export default function RecordsPage() {
   return (
-    <div className="p-8 space-y-8 max-w-6xl">
-      <header>
-        <h1 className="text-3xl font-bold tracking-tight text-white italic">
-          Investment Records
+    <div className="p-8 space-y-10 max-w-7xl mx-auto bg-background min-h-screen">
+      {/* HEADER SECTION */}
+      <header className="border-b border-border pb-8">
+        <div className="flex items-center gap-3 mb-2">
+          <div className="h-5 w-1 bg-primary" /> {/* Branding Accent */}
+          <p className="text-[10px] uppercase tracking-[0.3em] font-bold text-primary">
+            Institutional Ledger
+          </p>
+        </div>
+        <h1 className="text-4xl font-medium tracking-tight text-foreground italic">
+          Investment <span className="not-italic font-bold">Records</span>
         </h1>
-        <p className="text-zinc-500 text-sm mt-2">
-          A complete history of your asset acquisitions and status.
+        <p className="text-muted-foreground text-sm mt-3 font-medium max-w-2xl">
+          A complete historical audit of your asset acquisitions, compliance
+          status, and deployment timeline within the AssetCore ecosystem.
         </p>
       </header>
 
-      <div className="rounded-2xl border border-white/5 bg-zinc-900/20 overflow-hidden">
-        <table className="w-full text-left text-sm">
-          <thead className="bg-white/5 text-zinc-400 uppercase text-[10px] tracking-widest font-bold">
+      {/* TABLE SECTION */}
+      <div className="rounded-none border border-border bg-card overflow-hidden shadow-sm">
+        <table className="w-full text-left text-sm border-collapse">
+          <thead className="bg-secondary/50 text-foreground uppercase text-[10px] tracking-[0.2em] font-bold border-b border-border">
             <tr>
-              <th className="px-6 py-4">Asset Name</th>
-              <th className="px-6 py-4">Type</th>
-              <th className="px-6 py-4">Amount</th>
-              <th className="px-6 py-4">Status</th>
-              <th className="px-6 py-4 text-right">Date</th>
+              <th className="px-6 py-5">Asset Name</th>
+              <th className="px-6 py-5">Asset Class</th>
+              <th className="px-6 py-5">Capital Amount</th>
+              <th className="px-6 py-5">Verification Status</th>
+              <th className="px-6 py-5 text-right">Date of Entry</th>
             </tr>
           </thead>
-          <tbody className="divide-y divide-white/5">
+          <tbody className="divide-y divide-border">
             {MOCK_RECORDS.map((record) => (
               <tr
                 key={record.id}
-                className="hover:bg-white/[0.02] transition-colors"
+                className="hover:bg-primary/[0.03] transition-colors group"
               >
-                <td className="px-6 py-4 font-medium text-white">
+                <td className="px-6 py-5 font-bold text-foreground group-hover:text-primary transition-colors">
                   {record.assetName}
                 </td>
-                <td className="px-6 py-4 text-zinc-500">{record.type}</td>
-                <td className="px-6 py-4 font-mono text-zinc-300">
+                <td className="px-6 py-5 text-muted-foreground font-medium uppercase text-[11px] tracking-wide">
+                  {record.type}
+                </td>
+                <td className="px-6 py-5 font-bold text-foreground tabular-nums">
                   ${record.amount.toLocaleString()}
                 </td>
-                <td className="px-6 py-4">
+                <td className="px-6 py-5">
                   <span
-                    className={`px-2 py-1 rounded-full text-[10px] font-bold uppercase ${
+                    className={`px-3 py-1 rounded-none text-[10px] font-bold uppercase tracking-widest border ${
                       record.status === "Active"
-                        ? "bg-green-500/10 text-green-500"
-                        : "bg-yellow-500/10 text-yellow-500"
+                        ? "bg-emerald-50 text-emerald-700 border-emerald-200"
+                        : "bg-amber-50 text-amber-700 border-amber-200"
                     }`}
                   >
                     {record.status}
                   </span>
                 </td>
-                <td className="px-6 py-4 text-right text-zinc-500 font-mono">
+                <td className="px-6 py-5 text-right text-muted-foreground font-medium tabular-nums">
                   {record.date}
                 </td>
               </tr>
             ))}
           </tbody>
         </table>
+      </div>
+
+      {/* FOOTER */}
+      <div className="pt-4 space-y-4">
+        <p className="text-[10px] text-muted-foreground leading-relaxed max-w-4xl italic uppercase tracking-wider">
+          * All recorded figures are adjusted for current market volatility and
+          represent gross acquisition value. Please contact your AssetCore
+          representative for certified institutional statements and tax
+          documentation.
+        </p>
       </div>
     </div>
   );

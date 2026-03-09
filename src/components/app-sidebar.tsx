@@ -16,6 +16,7 @@ import {
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
+import { usePathname } from "next/navigation";
 
 const menuItems = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
@@ -25,55 +26,77 @@ const menuItems = [
 
 export function AppSidebar() {
   const { user } = useUser();
+  const pathname = usePathname();
 
   return (
     <Sidebar
       collapsible="icon"
-      className="border-r border-white/5 bg-zinc-950"
+      className="border-r border-border bg-secondary/30" // Professional Off-White
     >
-      <SidebarHeader className="p-4 border-b border-white/5 flex flex-row items-center justify-between">
+      <SidebarHeader className="p-6 border-b border-border bg-background">
         <div className="flex items-center gap-3 group-data-[collapsible=icon]:hidden">
-          <div className="flex aspect-square size-6 items-center justify-center rounded-lg bg-white text-black">
+          <div className="flex aspect-square size-7 items-center justify-center rounded-none bg-primary text-primary-foreground">
             <Command className="size-4" />
           </div>
-          <span className="truncate font-semibold text-white tracking-tighter uppercase italic">
-            AssetCore
+          <span className="truncate font-bold text-foreground tracking-tighter uppercase italic text-lg">
+            Asset
+            <span className="not-italic font-light text-primary">Core</span>
           </span>
         </div>
-        <SidebarTrigger className="text-zinc-400 hover:bg-zinc-900 transition-colors" />
+        <div className="group-data-[collapsible=icon]:block hidden">
+          <SidebarTrigger className="text-muted-foreground hover:text-primary transition-colors" />
+        </div>
       </SidebarHeader>
 
-      <SidebarContent className="overflow-hidden">
+      <SidebarContent className="bg-background/50">
         <SidebarGroup>
-          <SidebarMenu>
-            {menuItems.map((item) => (
-              <SidebarMenuItem key={item.title}>
-                <SidebarMenuButton
-                  asChild
-                  tooltip={item.title}
-                  className="py-6"
-                >
-                  <Link href={item.url}>
-                    <item.icon className="text-zinc-400" />
-                    <span className="text-zinc-300 font-medium">
-                      {item.title}
-                    </span>
-                  </Link>
-                </SidebarMenuButton>
-              </SidebarMenuItem>
-            ))}
+          <SidebarMenu className="gap-2 px-2 pt-4">
+            {menuItems.map((item) => {
+              const isActive = pathname === item.url;
+              return (
+                <SidebarMenuItem key={item.title}>
+                  <SidebarMenuButton
+                    asChild
+                    tooltip={item.title}
+                    className={`py-6 rounded-none transition-all ${
+                      isActive
+                        ? "bg-primary/10 text-primary border-r-4 border-primary"
+                        : "text-muted-foreground hover:bg-secondary hover:text-foreground"
+                    }`}
+                  >
+                    <Link
+                      href={item.url}
+                      className="flex items-center gap-4"
+                    >
+                      <item.icon
+                        className={`size-5 ${isActive ? "text-primary" : "text-muted-foreground"}`}
+                      />
+                      <span className="font-bold uppercase tracking-widest text-[11px]">
+                        {item.title}
+                      </span>
+                    </Link>
+                  </SidebarMenuButton>
+                </SidebarMenuItem>
+              );
+            })}
           </SidebarMenu>
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t border-white/5">
-        <div className="flex items-center gap-3 px-1 py-1.5">
-          <UserButton />
+      <SidebarFooter className="p-4 border-t border-border bg-background">
+        <div className="flex items-center gap-3 px-2 py-2">
+          <UserButton
+            appearance={{
+              elements: {
+                userButtonAvatarBox: "rounded-none size-8 border border-border",
+              },
+            }}
+          />
           <div className="grid flex-1 text-left text-sm leading-tight group-data-[collapsible=icon]:hidden">
-            <span className="truncate font-semibold text-white">
-              {user?.fullName || "User"}
+            <span className="truncate font-bold text-foreground text-xs uppercase tracking-tight">
+              {user?.fullName || "Institutional User"}
             </span>
-            <span className="truncate text-[10px] text-zinc-500">
+            <span className="truncate text-[10px] text-muted-foreground font-medium">
               {user?.primaryEmailAddress?.emailAddress}
             </span>
           </div>

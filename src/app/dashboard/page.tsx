@@ -2,7 +2,6 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { createClient } from "@supabase/supabase-js";
 import { MOCK_STATS } from "@/data/mock-records";
 
-// IMPORTANT: This must be "export default"
 export default async function DashboardPage() {
   const { userId } = await auth();
   const user = await currentUser();
@@ -31,33 +30,38 @@ export default async function DashboardPage() {
         month: "long",
         year: "numeric",
       })
-    : "06 March 2026";
+    : "09 March 2026";
 
   return (
-    <div className="p-8 space-y-10 max-w-6xl">
-      <header className="flex flex-col md:flex-row md:items-end justify-between gap-4">
-        <div className="space-y-1">
-          <h1 className="text-4xl font-bold tracking-tight text-white italic underline decoration-zinc-800">
-            Welcome back, {profile?.full_name?.split(" ")[0]}
+    <div className="p-8 space-y-12 max-w-7xl mx-auto bg-background text-foreground">
+      {/* HEADER SECTION */}
+      <header className="flex flex-col md:flex-row md:items-end justify-between gap-6 border-b border-border pb-8">
+        <div className="space-y-2">
+          <p className="text-primary text-[10px] uppercase tracking-[0.3em] font-bold">
+            AssetCore Global Command
+          </p>
+          <h1 className="text-4xl md:text-5xl font-medium tracking-tight text-foreground italic">
+            Welcome back,{" "}
+            <span className="not-italic font-bold">
+              {profile?.full_name?.split(" ")[0]}
+            </span>
           </h1>
-          <p className="text-zinc-500 text-sm font-medium tracking-wide">
-            AssetCore Command Center
-          </p>
         </div>
-        <div className="text-left md:text-right border-l md:border-l-0 md:border-r border-zinc-800 pl-4 md:pr-4">
-          <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-500 font-bold">
-            Member Since {memberSince}
+
+        <div className="text-left md:text-right space-y-1">
+          <p className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-bold">
+            Account Verified Since
           </p>
-          <p className="text-[10px] uppercase tracking-[0.2em] text-zinc-800 font-mono mt-1 break-all">
-            ID: {profile?.id}
-          </p>
+          <p className="text-sm font-medium text-foreground">{memberSince}</p>
         </div>
       </header>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      {/* STATS GRID */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <StatCard
-          label="Total Portfolio"
+          label="Total Portfolio Value"
           value={`$${MOCK_STATS.totalPortfolio.toLocaleString()}`}
+          isPrimary
         />
         <StatCard
           label="Active Assets"
@@ -70,19 +74,44 @@ export default async function DashboardPage() {
         <StatCard
           label="Pending Requests"
           value={MOCK_STATS.pendingRequests}
+          isWarning={Number(MOCK_STATS.pendingRequests) > 0}
         />
       </div>
     </div>
   );
 }
 
-function StatCard({ label, value }: { label: string; value: string | number }) {
+function StatCard({
+  label,
+  value,
+  isPrimary = false,
+  isWarning = false,
+}: {
+  label: string;
+  value: string | number;
+  isPrimary?: boolean;
+  isWarning?: boolean;
+}) {
   return (
-    <div className="p-6 rounded-2xl bg-zinc-900/40 border border-white/5">
-      <p className="text-zinc-500 text-[10px] uppercase tracking-wider font-bold mb-2">
+    <div
+      className={`p-8 rounded-none border ${isPrimary ? "border-primary bg-primary/5" : "border-border bg-card"} shadow-sm transition-all hover:shadow-md`}
+    >
+      <p className="text-muted-foreground text-[10px] uppercase tracking-[0.2em] font-bold mb-4">
         {label}
       </p>
-      <p className="text-2xl font-bold text-white tracking-tight">{value}</p>
+      <p
+        className={`text-3xl font-bold tracking-tighter ${isPrimary ? "text-primary" : "text-foreground"}`}
+      >
+        {value}
+      </p>
+      {isWarning && (
+        <div className="mt-4 flex items-center gap-2">
+          <div className="size-1.5 rounded-full bg-amber-500 animate-pulse" />
+          <span className="text-[9px] font-bold uppercase tracking-widest text-amber-600">
+            Action Required
+          </span>
+        </div>
+      )}
     </div>
   );
 }

@@ -13,9 +13,9 @@ export default async function DashboardLayout({
 
   return (
     <SidebarProvider>
-      <div className="flex min-h-screen w-full bg-black">
+      <div className="flex min-h-screen w-full bg-background">
         <AppSidebar />
-        <SidebarInset className="bg-black flex flex-col min-w-0">
+        <SidebarInset className="bg-background flex flex-col min-w-0 border-l border-border">
           <main className="flex-1">{children}</main>
         </SidebarInset>
       </div>

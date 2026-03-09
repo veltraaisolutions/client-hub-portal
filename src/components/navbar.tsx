@@ -13,54 +13,52 @@ import {
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-white/5 bg-black/60 backdrop-blur-xl px-6 py-4">
+    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md px-6 py-4">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo */}
+        {/* Logo  */}
         <Link
           href="/"
-          className="text-xl font-bold tracking-tighter hover:opacity-80 transition-opacity text-white uppercase"
+          className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity text-foreground uppercase italic"
         >
-          ASSET<span className="text-zinc-500">CORE</span>
+          ASSET<span className="text-primary font-light not-italic">CORE</span>
         </Link>
 
         {/* Auth Section */}
         <div className="flex items-center gap-4">
-          {/* 1. LOADING STATE: Renders while Clerk is initializing */}
+          {/* 1. LOADING STATE */}
           <ClerkLoading>
             <div className="flex items-center gap-4">
-              {/* Pulse skeleton for Dashboard link */}
-              <div className="h-4 w-20 bg-zinc-800 rounded animate-pulse hidden md:block" />
-              {/* Pulse skeleton for Avatar */}
-              <div className="h-9 w-9 bg-zinc-800 rounded-full animate-pulse border border-white/5" />
+              <div className="h-4 w-20 bg-muted rounded animate-pulse hidden md:block" />
+              <div className="h-9 w-9 bg-muted rounded-none animate-pulse border border-border" />
             </div>
           </ClerkLoading>
 
-          {/* 2. LOADED STATE: Renders when Clerk is ready or degraded */}
+          {/* 2. LOADED STATE */}
           <ClerkLoaded>
-            {/* Show these if the user is NOT signed in */}
+            {/* Signed Out */}
             <Show when="signed-out">
               <Link href="/sign-in">
                 <Button
                   variant="ghost"
-                  className="text-zinc-400 hover:text-white hover:bg-zinc-900 font-medium"
+                  className="text-foreground hover:text-primary hover:bg-transparent font-bold text-sm uppercase tracking-wider"
                 >
-                  Sign In
+                  Log In
                 </Button>
               </Link>
 
               <Link href="/sign-up">
-                <Button className="bg-white text-black hover:bg-zinc-200 rounded-sm px-6 font-semibold shadow-sm">
-                  Get Started
+                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-6 font-bold shadow-sm uppercase tracking-wider">
+                  Join Now
                 </Button>
               </Link>
             </Show>
 
-            {/* Show these if the user IS signed in */}
+            {/* Signed In */}
             <Show when="signed-in">
-              <div className="flex items-center gap-6">
+              <div className="flex items-center gap-8">
                 <Link
                   href="/dashboard"
-                  className="text-sm font-medium text-zinc-400 hover:text-white transition-colors"
+                  className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors uppercase tracking-widest"
                 >
                   Dashboard
                 </Link>
@@ -69,10 +67,11 @@ export default function Navbar() {
                   appearance={{
                     elements: {
                       userButtonAvatarBox:
-                        "h-9 w-9 border border-white/10 hover:border-white/20 transition-all",
+                        "h-9 w-9 border border-border hover:border-primary transition-all rounded-none",
                       userButtonPopoverCard:
-                        "bg-zinc-950 border border-white/10 text-white",
-                      userButtonPopoverActionButtonText: "text-zinc-400",
+                        "bg-background border border-border text-foreground shadow-xl rounded-none",
+                      userButtonPopoverActionButtonText:
+                        "text-foreground font-medium",
                       userButtonPopoverFooter: "hidden",
                     },
                   }}
@@ -80,17 +79,17 @@ export default function Navbar() {
               </div>
             </Show>
 
-            {/* DEGRADED STATE: Optional subtle warning if Clerk is slow */}
+            {/* DEGRADED STATE */}
             <ClerkDegraded>
-              <div className="text-[10px] text-yellow-500/50 uppercase tracking-widest px-2">
-                Slow Connection
+              <div className="text-[10px] text-yellow-600 uppercase tracking-widest px-2 font-bold">
+                Network Latency
               </div>
             </ClerkDegraded>
           </ClerkLoaded>
 
-          {/* 3. FAILED STATE: Renders if Clerk fails to load entirely */}
+          {/* 3. FAILED STATE */}
           <ClerkFailed>
-            <div className="text-[10px] text-red-500 uppercase tracking-widest px-2 font-bold">
+            <div className="text-[10px] text-destructive uppercase tracking-widest px-2 font-bold">
               System Offline
             </div>
           </ClerkFailed>
