@@ -20,7 +20,7 @@ import { usePathname } from "next/navigation";
 
 const menuItems = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-  // { title: "Stats", url: "/dashboard/stats", icon: BarChart3 },
+  { title: "Stats", url: "/dashboard/stats", icon: BarChart3 },
   // { title: "Records", url: "/dashboard/records", icon: Receipt },
 ];
 
