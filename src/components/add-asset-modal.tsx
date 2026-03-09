@@ -1,62 +1,71 @@
 "use client";
 
 import { useState } from "react";
-import { Plus, ShieldCheck } from "lucide-react";
+import { Plus, Edit2 } from "lucide-react";
 import {
   Dialog,
   DialogContent,
-  DialogHeader,
   DialogTitle,
   DialogTrigger,
+  DialogDescription,
 } from "@/components/ui/dialog";
-import { createClient } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { supabase } from "@/lib/supabase";
 
-export function AddAssetModal({ userId }: { userId: string }) {
+export function AddAssetModal({
+  userId,
+  initialEmail,
+  editData,
+}: {
+  userId: string;
+  initialEmail: string;
+  editData?: any;
+}) {
   const [open, setOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
-
-  // Initialize Supabase Client for client-side insertion
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
+  const isEditing = !!editData;
 
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
 
     const formData = new FormData(e.currentTarget);
-    const assetName = formData.get("assetName") as string;
-    const amount = Number(formData.get("amount"));
-    const type = formData.get("type") as string;
 
-    const { error } = await supabase.from("investments").insert({
-      user_id: userId,
-      asset_name: assetName,
-      asset_type: type,
-      amount: amount,
+    // Construct payload - Note: 'id' is intentionally omitted here for Inserts
+    const payload = {
+      asset_name: formData.get("assetName"),
+      assigned_email: formData.get("assignedEmail"),
+      amount: Number(formData.get("amount")),
+      asset_type: formData.get("type"),
       status: "Active",
-    });
+      user_id: userId,
+    };
 
-    if (error) {
-      toast.error("Authorization Failed", {
-        description: "The system could not verify the asset credentials.",
-      });
+    // Validation: Ensure amount is a valid number
+    if (isNaN(payload.amount)) {
+      toast.error("Invalid amount entered");
       setLoading(false);
       return;
     }
 
-    // Success Sequence: Toast + Refresh
-    toast.success("Asset Authorized", {
-      description: `${assetName} has been successfully deployed to the ledger.`,
-    });
+    // Direct operation based on mode
+    const { error } = isEditing
+      ? await supabase.from("investments").update(payload).eq("id", editData.id)
+      : await supabase.from("investments").insert([payload]); // Wrapped in array for insert safety
 
+    if (error) {
+      console.error("Supabase Error:", error);
+      toast.error(error.message || "Operation Failed");
+      setLoading(false);
+      return;
+    }
+
+    toast.success(isEditing ? "Entry Updated" : "Asset Authorized");
     setOpen(false);
     setLoading(false);
-    router.refresh(); // Triggers Server Component re-fetch for Overview/Records
+    router.refresh();
   }
 
   return (
@@ -65,69 +74,88 @@ export function AddAssetModal({ userId }: { userId: string }) {
       onOpenChange={setOpen}
     >
       <DialogTrigger asChild>
-        <button className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-none font-bold uppercase tracking-widest text-[10px] hover:bg-zinc-900 transition-all shadow-lg shadow-primary/10">
-          <Plus className="size-4" />
-          Authorize New Entry
-        </button>
+        {isEditing ? (
+          <button className="p-2 text-muted-foreground hover:text-primary transition-colors group-hover:opacity-100 opacity-0">
+            <Edit2 className="size-4" />
+          </button>
+        ) : (
+          <button className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-none font-bold uppercase tracking-widest text-[10px] hover:bg-zinc-900 transition-all active:scale-95">
+            <Plus className="size-4" /> Authorize New Entry
+          </button>
+        )}
       </DialogTrigger>
 
-      <DialogContent className="rounded-none border-none max-w-md bg-white p-0 overflow-hidden">
-        {/* Visual accent bar for PIMCO style */}
+      <DialogContent className="rounded-none border-none max-w-md bg-white p-0 shadow-2xl">
         <div className="h-2 bg-primary w-full" />
+
+        {/* Screen Reader Description - Fixes the Dialog Warning */}
+        <div className="sr-only">
+          <DialogDescription>
+            Management interface for authorizing new assets or updating existing
+            ledger records.
+          </DialogDescription>
+        </div>
 
         <form
           onSubmit={onSubmit}
-          className="p-8 space-y-8"
+          className="p-8 space-y-6"
         >
-          <DialogHeader>
-            <div className="flex items-center gap-2 mb-1">
-              <ShieldCheck className="size-4 text-primary" />
-              <span className="text-[10px] font-bold text-primary uppercase tracking-[0.2em]">
-                Institutional Security
-              </span>
-            </div>
-            <DialogTitle className="text-3xl font-bold italic tracking-tight text-foreground">
-              New{" "}
-              <span className="not-italic font-black text-primary">
-                Asset Entry
-              </span>
-            </DialogTitle>
-          </DialogHeader>
+          <DialogTitle className="text-2xl font-bold italic tracking-tight">
+            {isEditing ? "Edit Asset Details" : "New Asset Entry"}
+          </DialogTitle>
 
-          <div className="space-y-6">
-            <div className="space-y-1 group">
-              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest group-focus-within:text-primary transition-colors">
+          <div className="space-y-4">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                Client Email
+              </label>
+              <input
+                name="assignedEmail"
+                defaultValue={
+                  isEditing ? editData.assigned_email : initialEmail
+                }
+                required
+                placeholder="client@example.com"
+                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
                 Asset Identity
               </label>
               <input
                 name="assetName"
+                defaultValue={isEditing ? editData.asset_name : ""}
                 required
-                className="w-full border-b border-border py-2 outline-none focus:border-primary transition-all text-sm font-medium bg-transparent"
-                placeholder="e.g. London Residential Complex"
+                placeholder="e.g. S&P 500 Index Fund"
+                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
               />
             </div>
 
-            <div className="grid grid-cols-2 gap-8">
-              <div className="space-y-1 group">
-                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest group-focus-within:text-primary transition-colors">
-                  Capital Amount ($)
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                  Amount ($)
                 </label>
                 <input
                   name="amount"
                   type="number"
+                  defaultValue={isEditing ? editData.amount : ""}
                   required
-                  className="w-full border-b border-border py-2 outline-none focus:border-primary text-sm font-medium bg-transparent"
-                  placeholder="50000"
+                  placeholder="0.00"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
                 />
               </div>
 
-              <div className="space-y-1 group">
-                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest group-focus-within:text-primary transition-colors">
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
                   Asset Class
                 </label>
                 <select
                   name="type"
-                  className="w-full border-b border-border py-2 outline-none bg-transparent text-sm font-medium"
+                  defaultValue={isEditing ? editData.asset_type : "Equity"}
+                  className="w-full border-b border-border py-2 text-sm font-medium bg-transparent outline-none focus:border-primary cursor-pointer"
                 >
                   <option value="Equity">Equity</option>
                   <option value="Real Estate">Real Estate</option>
@@ -142,15 +170,14 @@ export function AddAssetModal({ userId }: { userId: string }) {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-primary text-white font-bold py-5 uppercase tracking-[0.3em] text-[10px] hover:bg-zinc-900 transition-all disabled:opacity-50"
+              className="w-full bg-primary text-white font-black py-5 uppercase text-[11px] tracking-[0.2em] hover:bg-zinc-900 transition-all disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading
-                ? "Verifying Credentials..."
-                : "Confirm & Deploy Capital"}
+                ? "Syncing with Ledger..."
+                : isEditing
+                  ? "Update Record"
+                  : "Confirm & Deploy"}
             </button>
-            <p className="text-[9px] text-center text-muted-foreground mt-4 uppercase tracking-tighter font-medium">
-              * This action will be recorded in the immutable audit trail
-            </p>
           </div>
         </form>
       </DialogContent>

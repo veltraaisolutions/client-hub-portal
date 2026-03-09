@@ -1,10 +1,10 @@
 "use client";
 
 import { Trash2 } from "lucide-react";
-import { createClient } from "@supabase/supabase-js";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 import { useState } from "react";
+import { supabase } from "@/lib/supabase";
 
 export function TrashActions({
   id,
@@ -15,25 +15,24 @@ export function TrashActions({
 }) {
   const router = useRouter();
   const [isDeleting, setIsDeleting] = useState(false);
-  const supabase = createClient(
-    process.env.NEXT_PUBLIC_SUPABASE_URL!,
-    process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
-  );
 
   async function handleDelete() {
-    if (!confirm(`Are you sure you want to remove ${assetName}?`)) return;
+    if (!confirm(`Permanently remove ${assetName} from the audit trail?`))
+      return;
 
     setIsDeleting(true);
+
+    //  Uses the single global supabase instance
     const { error } = await supabase.from("investments").delete().eq("id", id);
 
     if (!error) {
-      toast.success("Entry Purged", {
-        description: `${assetName} removed from ledger.`,
-      });
+      toast.success("Entry Purged");
       router.refresh();
     } else {
-      toast.error("Error", { description: "Could not delete entry." });
+      console.error("Delete Error:", error);
+      toast.error("Delete Failed");
     }
+
     setIsDeleting(false);
   }
 
@@ -41,9 +40,10 @@ export function TrashActions({
     <button
       onClick={handleDelete}
       disabled={isDeleting}
-      className="text-muted-foreground hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100"
+      className="p-2 text-muted-foreground hover:text-red-600 transition-colors opacity-0 group-hover:opacity-100 flex ml-auto disabled:opacity-30"
+      title="Delete Record"
     >
-      <Trash2 className="size-4" />
+      <Trash2 className={isDeleting ? "animate-pulse size-4" : "size-4"} />
     </button>
   );
 }

@@ -1,7 +1,13 @@
 "use client";
 
 import * as React from "react";
-import { LayoutDashboard, BarChart3, Receipt, Command } from "lucide-react";
+import {
+  LayoutDashboard,
+  BarChart3,
+  Receipt,
+  Command,
+  Users,
+} from "lucide-react";
 import {
   Sidebar,
   SidebarContent,
@@ -13,6 +19,7 @@ import {
   SidebarRail,
   SidebarTrigger,
   SidebarGroup,
+  SidebarGroupLabel,
 } from "@/components/ui/sidebar";
 import Link from "next/link";
 import { UserButton, useUser } from "@clerk/nextjs";
@@ -20,7 +27,7 @@ import { usePathname } from "next/navigation";
 
 const menuItems = [
   { title: "Overview", url: "/dashboard", icon: LayoutDashboard },
-  { title: "Stats", url: "/dashboard/stats", icon: BarChart3 },
+  // { title: "Stats", url: "/dashboard/stats", icon: BarChart3 },
   { title: "Records", url: "/dashboard/records", icon: Receipt },
 ];
 
@@ -28,10 +35,14 @@ export function AppSidebar() {
   const { user } = useUser();
   const pathname = usePathname();
 
+  // The Master User ID provided
+  const MASTER_USER_ID = "user_3AYuN7sMwNBznIoceq9c7psqbeT";
+  const isMaster = user?.id === MASTER_USER_ID;
+
   return (
     <Sidebar
       collapsible="icon"
-      className="border-r border-border bg-secondary/30" // Professional Off-White
+      className="border-r border-border bg-secondary/30"
     >
       <SidebarHeader className="p-6 border-b border-border bg-background">
         <div className="flex items-center gap-3 group-data-[collapsible=icon]:hidden">
@@ -81,6 +92,44 @@ export function AppSidebar() {
             })}
           </SidebarMenu>
         </SidebarGroup>
+
+        {/* MASTER ONLY SECTION: CLIENT DIRECTORY */}
+        {isMaster && (
+          <SidebarGroup className="mt-4">
+            <SidebarGroupLabel className="px-4 text-[10px] font-black text-primary uppercase tracking-[0.2em]">
+              Client Portals
+            </SidebarGroupLabel>
+            <SidebarMenu className="gap-1 px-2">
+              <SidebarMenuItem>
+                <SidebarMenuButton
+                  asChild
+                  className={`py-6 rounded-none border-l-2 transition-all ${
+                    pathname === "/dashboard/users"
+                      ? "bg-primary/10 text-primary border-primary"
+                      : "hover:bg-secondary border-transparent hover:border-primary"
+                  }`}
+                >
+                  <Link
+                    href="/dashboard/users"
+                    className="flex items-center gap-4"
+                  >
+                    <Users
+                      className={`size-5 ${pathname === "/dashboard/users" ? "text-primary" : "text-muted-foreground"}`}
+                    />
+                    <div className="flex flex-col">
+                      <span className="font-bold uppercase tracking-widest text-[10px]">
+                        Manage Clients
+                      </span>
+                      <span className="text-[8px] text-muted-foreground">
+                        Master Directory
+                      </span>
+                    </div>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            </SidebarMenu>
+          </SidebarGroup>
+        )}
       </SidebarContent>
 
       <SidebarFooter className="p-4 border-t border-border bg-background">
@@ -97,7 +146,7 @@ export function AppSidebar() {
               {user?.fullName || "Institutional User"}
             </span>
             <span className="truncate text-[10px] text-muted-foreground font-medium">
-              {user?.primaryEmailAddress?.emailAddress}
+              {isMaster ? "Administrator" : "Client Account"}
             </span>
           </div>
         </div>
