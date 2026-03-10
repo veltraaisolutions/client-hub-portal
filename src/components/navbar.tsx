@@ -20,7 +20,8 @@ export default function Navbar() {
           href="/"
           className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity text-foreground uppercase italic"
         >
-          ASSET<span className="text-primary font-light not-italic">CORE</span>
+          Pacific client{" "}
+          <span className="text-primary font-light not-italic">hub</span>
         </Link>
 
         {/* Auth Section */}

@@ -50,8 +50,8 @@ export function AppSidebar() {
             <Command className="size-4" />
           </div>
           <span className="truncate font-bold text-foreground tracking-tighter uppercase italic text-lg">
-            Asset
-            <span className="not-italic font-light text-primary">Core</span>
+            Pacific client
+            <span className="not-italic font-light text-primary"> Hub</span>
           </span>
         </div>
         <div className="group-data-[collapsible=icon]:block hidden">

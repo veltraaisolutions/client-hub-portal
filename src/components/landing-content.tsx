@@ -61,12 +61,6 @@ export function LandingContent({
                 <Link href="/dashboard">Access Dashboard</Link>
               </Button>
             )}
-            <Link
-              href="#"
-              className="text-sm font-bold border-b-2 border-primary pb-1 hover:text-primary transition-all"
-            >
-              View Our Process
-            </Link>
           </div>
         </div>
       </section>
@@ -88,7 +82,7 @@ export function LandingContent({
               {
                 icon: Zap,
                 title: "Experts",
-                desc: "Meet AssetCore experts across the globe who are dedicated to helping you reach your goals.",
+                desc: "Meet Pacific client hub experts across the globe who are dedicated to helping you reach your goals.",
               },
             ].map((pillar, i) => (
               <div
