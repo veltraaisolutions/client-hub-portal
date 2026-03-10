@@ -34,7 +34,7 @@ export const FOOTER_DATA = [
         name: "About Us",
         slug: "who-we-are",
         content:
-          "AssetCore is a premier global investment manager dedicated to infrastructure excellence.",
+          "Pacific client hub is a premier global investment manager dedicated to infrastructure excellence.",
       },
       {
         name: "Our Process",
