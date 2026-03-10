@@ -25,7 +25,6 @@ export function LandingContent({
               Institutional Grade Infrastructure
             </Badge>
 
-            {/*  Header  */}
             <h1 className="text-5xl md:text-7xl font-medium tracking-tight leading-[1.1] text-foreground">
               You Face Challenges. <br />
               <span className="italic font-light text-muted-foreground block mt-1">
@@ -65,6 +64,7 @@ export function LandingContent({
         </div>
       </section>
 
+      {/* PILLARS SECTION */}
       <section className="bg-secondary/50 py-24 border-y border-border">
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -72,16 +72,19 @@ export function LandingContent({
               {
                 icon: Shield,
                 title: "About Us",
+                slug: "who-we-are", // Updated slug
                 desc: "We believe that active management is the most responsible way to invest for the long term.",
               },
               {
                 icon: Activity,
                 title: "Our Process",
+                slug: "our-process", // Updated slug
                 desc: "Honed over more than five decades, our investment process is rigorous and time-tested.",
               },
               {
                 icon: Zap,
                 title: "Experts",
+                slug: "experts", // Updated slug
                 desc: "Meet Pacific client hub experts across the globe who are dedicated to helping you reach your goals.",
               },
             ].map((pillar, i) => (
@@ -89,6 +92,7 @@ export function LandingContent({
                 key={i}
                 className="bg-card p-12 border border-border shadow-sm hover:shadow-md transition-shadow space-y-6"
               >
+                <pillar.icon className="h-8 w-8 text-primary" />
                 <h3 className="text-2xl font-semibold tracking-tight text-foreground">
                   {pillar.title}
                 </h3>
@@ -96,7 +100,7 @@ export function LandingContent({
                   {pillar.desc}
                 </p>
                 <Link
-                  href="#"
+                  href={`/info/${pillar.slug}`}
                   className="inline-flex items-center text-primary font-bold text-sm group"
                 >
                   Learn More{" "}
