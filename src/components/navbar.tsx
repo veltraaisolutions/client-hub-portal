@@ -13,53 +13,45 @@ import {
 
 export default function Navbar() {
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-border bg-background/95 backdrop-blur-md px-6 py-4">
-      <div className="max-w-7xl mx-auto flex items-center justify-between">
-        {/* Logo  */}
+    <nav className="sticky top-0 z-50 w-full bg-white border-b border-slate-100 px-8">
+      <div className="max-w-[1440px] mx-auto flex items-center justify-between h-24">
+        {/* LOGO  */}
         <Link
           href="/"
-          className="text-2xl font-bold tracking-tighter hover:opacity-80 transition-opacity text-foreground uppercase italic"
+          className="flex items-center gap-1 hover:opacity-80 transition-opacity"
         >
-          Pacific client{" "}
-          <span className="text-primary font-light not-italic">hub</span>
+          <span className="text-2xl font-bold tracking-tighter text-black uppercase italic">
+            Pacific client
+          </span>
+          <span className="text-2xl font-light tracking-tighter text-[#0070f3] uppercase">
+            hub
+          </span>
         </Link>
 
-        {/* Auth Section */}
-        <div className="flex items-center gap-4">
-          {/* 1. LOADING STATE */}
+        {/* AUTH SECTION */}
+        <div className="flex items-center gap-8">
           <ClerkLoading>
-            <div className="flex items-center gap-4">
-              <div className="h-4 w-20 bg-muted rounded animate-pulse hidden md:block" />
-              <div className="h-9 w-9 bg-muted rounded-none animate-pulse border border-border" />
-            </div>
+            <div className="h-10 w-24 bg-slate-50 animate-pulse border border-slate-100" />
           </ClerkLoading>
 
-          {/* 2. LOADED STATE */}
           <ClerkLoaded>
             {/* Signed Out */}
             <Show when="signed-out">
-              <Link href="/sign-in">
-                <Button
-                  variant="ghost"
-                  className="text-foreground hover:text-primary hover:bg-transparent font-bold text-sm uppercase tracking-wider"
-                >
-                  Log In
-                </Button>
-              </Link>
-
-              <Link href="/sign-up">
-                <Button className="bg-primary text-primary-foreground hover:bg-primary/90 rounded-none px-6 font-bold shadow-sm uppercase tracking-wider">
-                  Join Now
-                </Button>
-              </Link>
+              <Button
+                variant="outline"
+                asChild
+                className="rounded-none border-[#0070f3] border-[1.5px] text-[#0070f3] bg-transparent hover:bg-[#0070f3] hover:text-white font-bold text-[12px] uppercase tracking-[0.2em] px-8 h-12 transition-all duration-300 shadow-none"
+              >
+                <Link href="/sign-in">Log In</Link>
+              </Button>
             </Show>
 
             {/* Signed In */}
             <Show when="signed-in">
-              <div className="flex items-center gap-8">
+              <div className="flex items-center gap-10">
                 <Link
                   href="/dashboard"
-                  className="text-sm font-bold text-muted-foreground hover:text-primary transition-colors uppercase tracking-widest"
+                  className="text-[12px] font-bold text-black hover:text-[#0070f3] transition-colors uppercase tracking-[0.2em]"
                 >
                   Dashboard
                 </Link>
@@ -68,11 +60,9 @@ export default function Navbar() {
                   appearance={{
                     elements: {
                       userButtonAvatarBox:
-                        "h-9 w-9 border border-border hover:border-primary transition-all rounded-none",
+                        "h-10 w-10 border border-[#0070f3] rounded-none hover:opacity-80 transition-all",
                       userButtonPopoverCard:
-                        "bg-background border border-border text-foreground shadow-xl rounded-none",
-                      userButtonPopoverActionButtonText:
-                        "text-foreground font-medium",
+                        "bg-white border border-slate-200 shadow-xl rounded-none",
                       userButtonPopoverFooter: "hidden",
                     },
                   }}
@@ -80,19 +70,17 @@ export default function Navbar() {
               </div>
             </Show>
 
-            {/* DEGRADED STATE */}
             <ClerkDegraded>
-              <div className="text-[10px] text-yellow-600 uppercase tracking-widest px-2 font-bold">
-                Network Latency
-              </div>
+              <span className="text-[10px] font-bold uppercase tracking-widest text-slate-400">
+                Connecting...
+              </span>
             </ClerkDegraded>
           </ClerkLoaded>
 
-          {/* 3. FAILED STATE */}
           <ClerkFailed>
-            <div className="text-[10px] text-destructive uppercase tracking-widest px-2 font-bold">
-              System Offline
-            </div>
+            <span className="text-[10px] font-bold uppercase tracking-widest text-red-500">
+              Offline
+            </span>
           </ClerkFailed>
         </div>
       </div>
