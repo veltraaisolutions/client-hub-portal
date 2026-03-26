@@ -6,11 +6,11 @@ export default async function OverviewPage() {
   const { userId } = await auth();
   const user = await currentUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress;
-  console.log("Current Logged In ID:", userId); 
+  console.log("Current Logged In ID:", userId);
 
   const MASTER_IDS = [
     // "user_3AYuN7sMwNBznIoceq9c7psqbeT", // veltra
-    "user_3BTnQQ0tGuxLXAiI5jdtphvzlS7", // Stonepeak
+    "user_3BTsg6kSbYZtxfN2v95I3mUEnyj", // Stonepeak
   ];
 
   const isMaster = userId ? MASTER_IDS.includes(userId) : false;

@@ -38,7 +38,7 @@ export function AppSidebar() {
   // support both master accounts
   const MASTER_IDS = [
     // "user_3AYuN7sMwNBznIoceq9c7psqbeT",
-    "user_3BTnQQ0tGuxLXAiI5jdtphvzlS7",
+    "user_3BTsg6kSbYZtxfN2v95I3mUEnyj",
   ];
 
   const isMaster = !!user?.id && MASTER_IDS.includes(user.id);
