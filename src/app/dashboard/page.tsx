@@ -44,9 +44,6 @@ export default async function OverviewPage() {
     <div className="p-8 space-y-12 max-w-7xl mx-auto bg-background min-h-screen">
       <header className="flex justify-between items-end border-b border-border pb-8">
         <div className="space-y-1">
-          <p className="text-primary text-[10px] uppercase tracking-[0.4em] font-bold">
-            {isMaster ? "Veltra Administration" : "Client Asset Ledger"}
-          </p>
           <h1 className="text-4xl font-light tracking-tight text-foreground">
             Welcome, <span className="font-bold italic">{user?.firstName}</span>
           </h1>
