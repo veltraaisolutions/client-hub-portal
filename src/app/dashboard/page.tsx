@@ -7,8 +7,12 @@ export default async function OverviewPage() {
   const user = await currentUser();
   const userEmail = user?.primaryEmailAddress?.emailAddress;
 
-  const MASTER_USER_ID = "user_3AYuN7sMwNBznIoceq9c7psqbeT";
-  const isMaster = userId === MASTER_USER_ID;
+  const MASTER_IDS = [
+    "user_3AYuN7sMwNBznIoceq9c7psqbeT", // veltra
+    "user_3BTnQQ0tGuxLXAiI5jdtphvzlS7", // Stonepeak
+  ];
+
+  const isMaster = userId ? MASTER_IDS.includes(userId) : false;
 
   // Fetching data using the shared singleton
   let query = supabase.from("investments").select("amount, asset_type");
