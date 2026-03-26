@@ -22,10 +22,10 @@ export function LandingContent({
       <FeaturesSection />
       <CTASection />
       <WhyNowSection />
-      {/* <ResourcesSection />
+      <ResourcesSection />
       <PodcastSection />
       <StatsSection />
-      <IntroPlusSection /> */}
+      <IntroPlusSection />
     </div>
   );
 }
