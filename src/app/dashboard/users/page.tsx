@@ -5,7 +5,7 @@ export default async function UsersPage() {
   const { userId } = await auth();
 
   // Security: Only allow the Master User
-  const MASTER_USER_ID = "user_3AYuN7sMwNBznIoceq9c7psqbeT";
+  const MASTER_USER_ID = "user_3BTsg6kSbYZtxfN2v95I3mUEnyj";
   if (userId !== MASTER_USER_ID) {
     redirect("/dashboard");
   }
