@@ -18,7 +18,7 @@ export function Hero({ isAuthenticated }: { isAuthenticated: boolean }) {
 
       <div className="relative z-10 max-w-5xl mx-auto text-center space-y-12">
         <h1 className="text-4xl md:text-7xl font-serif text-white tracking-tight leading-[1.1] drop-shadow-sm">
-          Pacific Client Hub is the <br />
+          Stonepeak Partners is the <br />
           dedicated wealth solutions platform.
         </h1>
 

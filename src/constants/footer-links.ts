@@ -71,7 +71,7 @@ export const FOOTER_DATA = [
         name: "About Us",
         slug: "who-we-are",
         content:
-          "Pacific Client Hub is a premier global investment manager dedicated to infrastructure excellence and long-term value creation.",
+          "Stonepeak Partners Hub is a premier global investment manager dedicated to infrastructure excellence and long-term value creation.",
         heroImage:
           "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80",
         timelineImages: [
@@ -251,7 +251,7 @@ export const FOOTER_DATA = [
         name: "Legal",
         slug: "legal",
         content:
-          "Corporate legal disclosures and regulatory filings for Pacific Client Hub Global and its subsidiaries.",
+          "Corporate legal disclosures and regulatory filings for Stonepeak Partners Global and its subsidiaries.",
         heroImage:
           "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80",
         timelineImages: [

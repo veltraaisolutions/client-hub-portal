@@ -21,10 +21,10 @@ export default function Navbar() {
           className="flex items-center gap-1 hover:opacity-80 transition-opacity"
         >
           <span className="text-2xl font-bold tracking-tighter text-black uppercase italic">
-            Pacific client
+            Stonepeak
           </span>
           <span className="text-2xl font-light tracking-tighter text-[#0070f3] uppercase">
-            hub
+            Partners
           </span>
         </Link>
 

@@ -47,7 +47,7 @@ export function Footer() {
         <div className="py-10 flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-2">
             <span className="font-bold tracking-tighter text-2xl uppercase italic">
-              Pacific client hub
+              Stonepeak Partners
             </span>
           </div>
           <div className="flex items-center gap-6 text-xs font-bold tracking-widest uppercase text-zinc-400">
@@ -61,8 +61,8 @@ export function Footer() {
         {/* LEGAL DISCLOSURES & BOTTOM LINKS */}
         <div className="space-y-6 text-[11px] leading-relaxed text-zinc-500 max-w-5xl">
           <p>
-            © 2026 Pacific client hub Global Infrastructure. All rights
-            reserved. Pacific client hub is a trademark of Pacific client hub
+            © 2026 Stonepeak Partners Global Infrastructure. All rights
+            reserved. Stonepeak Partners is a trademark of Stonepeak Partners
             Global Infrastructure LLC.
           </p>
           <p>

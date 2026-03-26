@@ -13,7 +13,7 @@ import {
 const TIMELINE_ITEMS = [
   {
     year: "1971",
-    title: "Pacific Client Hub Founded",
+    title: "Stonepeak Partners Founded",
     desc: "Established with a singular vision: to deliver institutional-grade investment solutions for the modern era.",
   },
   {
@@ -114,7 +114,7 @@ export default async function InfoPage({ params }: any) {
             className="font-bold text-[#001a40] mb-4"
             style={{ fontSize: "clamp(1.5rem,3vw,2.25rem)" }}
           >
-            The Full Force of Pacific Client Hub Behind You
+            The Full Force of Stonepeak Partners Behind You
           </h2>
           <p
             className="text-zinc-600 max-w-3xl mb-12 leading-relaxed"
@@ -275,9 +275,9 @@ export default async function InfoPage({ params }: any) {
                   style={{ zIndex: 1 }}
                 >
                   <p className="font-bold text-[#001a40] text-xs uppercase tracking-widest leading-tight">
-                    PACIFIC CLIENT
+                    Stonepeak Partners
                     <br />
-                    HUB PORTFOLIO
+                    PORTFOLIO
                   </p>
                 </div>
               </div>
@@ -383,7 +383,7 @@ export default async function InfoPage({ params }: any) {
               className="font-bold mb-5"
               style={{ fontSize: "clamp(1.75rem,3.5vw,2.5rem)" }}
             >
-              Join Pacific Client Hub
+              Join Stonepeak Partners
             </h2>
             <p
               className="text-blue-200 leading-relaxed mb-8"
@@ -533,7 +533,7 @@ export default async function InfoPage({ params }: any) {
           </p>
           <p className="text-xs text-zinc-400 max-w-4xl leading-relaxed">
             This information regarding <strong>{pageData.name}</strong> is
-            institutional content for Pacific Client Hub Global. All information
+            institutional content for Stonepeak Partners Global. All information
             is strictly for professional investors. Past performance is not a
             guarantee or a reliable indicator of future results.
           </p>

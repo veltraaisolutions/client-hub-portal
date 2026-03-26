@@ -34,7 +34,7 @@ export function LandingContent({
                 icon: Zap,
                 title: "Experts",
                 slug: "experts",
-                desc: "Meet Pacific client hub experts across the globe who are dedicated to helping you reach your goals.",
+                desc: "Meet Stonepeak Partners experts across the globe who are dedicated to helping you reach your goals.",
               },
             ].map((pillar, i) => (
               <div
