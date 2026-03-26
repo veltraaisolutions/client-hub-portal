@@ -37,7 +37,7 @@ export function AppSidebar() {
 
   // support both master accounts
   const MASTER_IDS = [
-    "user_3AYuN7sMwNBznIoceq9c7psqbeT",
+    // "user_3AYuN7sMwNBznIoceq9c7psqbeT",
     "user_3BTnQQ0tGuxLXAiI5jdtphvzlS7",
   ];
 

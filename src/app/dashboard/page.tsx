@@ -9,7 +9,7 @@ export default async function OverviewPage() {
   console.log("Current Logged In ID:", userId); 
 
   const MASTER_IDS = [
-    "user_3AYuN7sMwNBznIoceq9c7psqbeT", // veltra
+    // "user_3AYuN7sMwNBznIoceq9c7psqbeT", // veltra
     "user_3BTnQQ0tGuxLXAiI5jdtphvzlS7", // Stonepeak
   ];
 
