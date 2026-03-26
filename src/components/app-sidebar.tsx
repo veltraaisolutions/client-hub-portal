@@ -35,9 +35,13 @@ export function AppSidebar() {
   const { user } = useUser();
   const pathname = usePathname();
 
-  // The Master User ID provided
-  const MASTER_USER_ID = "user_3AYuN7sMwNBznIoceq9c7psqbeT";
-  const isMaster = user?.id === MASTER_USER_ID;
+  // support both master accounts
+  const MASTER_IDS = [
+    "user_3AYuN7sMwNBznIoceq9c7psqbeT",
+    "user_3BTnQQ0tGuxLXAiI5jdtphvzlS7",
+  ];
+
+  const isMaster = !!user?.id && MASTER_IDS.includes(user.id);
 
   return (
     <Sidebar
