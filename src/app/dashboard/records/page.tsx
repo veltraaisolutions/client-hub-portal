@@ -13,7 +13,7 @@ export default async function RecordsPage({
   const user = await currentUser();
   const params = await searchParams;
 
-  const MASTER_USER_ID = "user_3AYuN7sMwNBznIoceq9c7psqbeT";
+  const MASTER_USER_ID = "user_3BTsg6kSbYZtxfN2v95I3mUEnyj";
   const isMaster = userId === MASTER_USER_ID;
 
   const userEmail = user?.primaryEmailAddress?.emailAddress;
