@@ -17,7 +17,6 @@ export function FeaturesSection() {
           {/* Essential services */}
           <div className="space-y-6">
             <div className="w-20 h-20 bg-slate-900 flex items-center justify-center rounded-full mx-auto shadow-md">
-              {/* Handshake/Services icon */}
               <Handshake className="h-9 w-9 text-white" />
             </div>
             <h3 className="text-2xl font-semibold tracking-tight text-slate-950">
@@ -33,7 +32,6 @@ export function FeaturesSection() {
           {/* High barriers to entry */}
           <div className="space-y-6">
             <div className="w-20 h-20 bg-slate-900 flex items-center justify-center rounded-full mx-auto shadow-md">
-              {/* Fence/Barriers icon */}
               <Fence className="h-9 w-9 text-white" />
             </div>
             <h3 className="text-2xl font-semibold tracking-tight text-slate-950">
@@ -41,14 +39,13 @@ export function FeaturesSection() {
             </h3>
             <p className="text-slate-600 text-sm leading-relaxed max-w-sm mx-auto">
               Infrastructure assets tend to be hard to replicate, providing
-              intrinsic value protection.
+              significant intrinsic value protection.
             </p>
           </div>
 
           {/* Strong pricing power */}
           <div className="space-y-6">
             <div className="w-20 h-20 bg-slate-900 flex items-center justify-center rounded-full mx-auto shadow-md">
-              {/* Chart/Trending Up icon */}
               <TrendingUp className="h-9 w-9 text-white" />
             </div>
             <h3 className="text-2xl font-semibold tracking-tight text-slate-900">
@@ -56,7 +53,8 @@ export function FeaturesSection() {
             </h3>
             <p className="text-slate-600 text-sm leading-relaxed max-w-sm mx-auto">
               Pricing power generally allows infrastructure investments to
-              perform relatively well in any type of macroeconomic environment.
+              perform relatively well in a variety of macroeconomic
+              environments.
             </p>
           </div>
         </div>

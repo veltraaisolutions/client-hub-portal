@@ -18,7 +18,7 @@ export function PioneersSection() {
       <div className="relative w-full aspect-video bg-black overflow-hidden shadow-2xl">
         <iframe
           className="absolute inset-0 w-full h-full pointer-events-none"
-          src="https://www.youtube.com/embed/jPkBJY1KI_Q?autoplay=1&mute=1&loop=1&playlist=jPkBJY1KI_Q&controls=0&rel=0&showinfo=0&iv_load_policy=3"
+          src="https://www.youtube.com/embed/koPkElMab4U?autoplay=1&mute=1&loop=1&playlist=koPkElMab4U&controls=0&rel=0&showinfo=0&iv_load_policy=3"
           title="Stonepeak Partners Cinematic Video"
           frameBorder="0"
           allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

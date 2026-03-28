@@ -33,7 +33,7 @@ export function WhyNowSection() {
           */}
           <iframe
             className="absolute inset-0 w-full h-full pointer-events-none scale-105"
-            src="https://www.youtube.com/embed/3H6Evu2hPpE?autoplay=1&mute=1&loop=1&playlist=3H6Evu2hPpE&controls=0&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1"
+            src="https://www.youtube.com/embed/EEX0EHTTePE?autoplay=1&mute=1&loop=1&playlist=EEX0EHTTePE&controls=0&rel=0&showinfo=0&iv_load_policy=3&modestbranding=1"
             title="Infrastructure Insights Video"
             frameBorder="0"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
