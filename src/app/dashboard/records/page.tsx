@@ -2,7 +2,7 @@ import { auth, currentUser } from "@clerk/nextjs/server";
 import { supabase } from "@/lib/supabase";
 import { AddAssetModal } from "@/components/add-asset-modal";
 import { TrashActions } from "@/components/trash-actions";
-import { Inbox } from "lucide-react";
+import { Inbox, Calendar } from "lucide-react";
 
 export default async function RecordsPage({
   searchParams,
@@ -13,26 +13,20 @@ export default async function RecordsPage({
   const user = await currentUser();
   const params = await searchParams;
 
-  const MASTER_USER_ID = "user_3BTsg6kSbYZtxfN2v95I3mUEnyj";
-  const isMaster = userId === MASTER_USER_ID;
+  const MASTER_ADMINS = ["user_3BTsg6kSbYZtxfN2v95I3mUEnyj"];
+  const isMaster = userId ? MASTER_ADMINS.includes(userId) : false;
 
   const userEmail = user?.primaryEmailAddress?.emailAddress;
-
-  /** *
-   * If an email is in the URL (?email=...), use it.
-   * Otherwise, fall back to the logged-in user's email.
-   */
   const targetEmail = params.email || userEmail;
 
   // Fetching data
   let query = supabase.from("investments").select("*");
 
-  //  Only filter if we actually have an email to filter by
   if (targetEmail) {
     query = query.eq("assigned_email", targetEmail);
   }
 
-  const { data: records } = await query.order("created_at", {
+  const { data: records } = await query.order("transaction_date", {
     ascending: false,
   });
 
@@ -58,8 +52,6 @@ export default async function RecordsPage({
         {isMaster && (
           <AddAssetModal
             userId={userId!}
-            // s Passing targetEmail here ensures new entries
-            // inherit the email you are currently viewing.
             initialEmail={targetEmail || ""}
           />
         )}
@@ -70,13 +62,16 @@ export default async function RecordsPage({
           <thead>
             <tr className="bg-muted/50 border-b border-border">
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
-                Asset Name
+                Asset & Class
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
-                Asset Class
+                Date
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
-                Capital Amount
+                Buy / Sell Price
+              </th>
+              <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
+                Total Value
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground text-right pr-8">
                 Actions
@@ -90,11 +85,31 @@ export default async function RecordsPage({
                   key={item.id}
                   className="border-b border-border hover:bg-muted/30 transition-colors group"
                 >
-                  <td className="p-4 font-bold text-primary italic">
-                    {item.asset_name}
+                  <td className="p-4">
+                    <div className="font-bold text-primary italic">
+                      {item.asset_name}
+                    </div>
+                    <div className="text-[10px] uppercase text-muted-foreground font-medium">
+                      {item.asset_type}
+                    </div>
                   </td>
-                  <td className="p-4 text-xs font-medium uppercase text-muted-foreground">
-                    {item.asset_type}
+                  <td className="p-4">
+                    <div className="flex items-center gap-1.5 text-xs font-medium text-slate-600">
+                      <Calendar className="size-3" />
+                      {new Date(item.transaction_date).toLocaleDateString()}
+                    </div>
+                  </td>
+                  <td className="p-4">
+                    <div className="text-xs">
+                      <span className="text-muted-foreground">B:</span> $
+                      {Number(item.buy_price || 0).toLocaleString()}
+                    </div>
+                    {item.sell_price > 0 && (
+                      <div className="text-xs">
+                        <span className="text-muted-foreground">S:</span> $
+                        {Number(item.sell_price).toLocaleString()}
+                      </div>
+                    )}
                   </td>
                   <td className="p-4 font-bold">
                     ${Number(item.amount).toLocaleString()}
@@ -123,7 +138,7 @@ export default async function RecordsPage({
             ) : (
               <tr>
                 <td
-                  colSpan={4}
+                  colSpan={5}
                   className="py-32 text-center"
                 >
                   <Inbox className="size-8 mx-auto text-muted-foreground/40 mb-4" />

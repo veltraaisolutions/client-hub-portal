@@ -20,6 +20,9 @@ interface Investment {
   amount: number;
   asset_type: string;
   status: string;
+  buy_price: number;
+  sell_price?: number;
+  transaction_date: string;
 }
 
 export function AddAssetModal({
@@ -42,19 +45,19 @@ export function AddAssetModal({
 
     const formData = new FormData(e.currentTarget);
 
-    // ✅ Clean values and ensure they are strings/numbers
     const payload = {
       asset_name: (formData.get("assetName")?.toString() || "").trim(),
       assigned_email: (formData.get("assignedEmail")?.toString() || "").trim(),
       amount: Number(formData.get("amount")) || 0,
-      asset_type: formData.get("type")?.toString() || "Equity",
+      asset_type: (formData.get("type")?.toString() || "").trim(),
+      buy_price: Number(formData.get("buyPrice")) || 0,
+      sell_price: Number(formData.get("sellPrice")) || 0,
+      transaction_date: formData.get("timestamp")
+        ? new Date(formData.get("timestamp") as string).toISOString()
+        : new Date().toISOString(),
       status: "Active",
-      user_id: userId || "", // Ensure this is never undefined
+      user_id: userId || "",
     };
-
-    // ✅ Debug Logging
-    console.log("Submit Payload:", payload);
-    console.log("Operation Mode:", isEditing ? "UPDATE" : "INSERT");
 
     if (!payload.user_id) {
       toast.error("User Identity missing. Please re-login.");
@@ -62,33 +65,23 @@ export function AddAssetModal({
       return;
     }
 
-    if (isNaN(payload.amount) || payload.amount <= 0) {
-      toast.error("Please enter a valid amount");
-      setLoading(false);
-      return;
-    }
-
     try {
-      const { data, error } = isEditing
+      const { error } = isEditing
         ? await supabase
             .from("investments")
             .update(payload)
             .eq("id", editData.id)
-            .select()
-        : await supabase.from("investments").insert([payload]).select();
+        : await supabase.from("investments").insert([payload]);
 
       if (error) {
-        console.error("Supabase Error Object:", error);
         toast.error(error.message || "Database Operation Failed");
       } else {
-        console.log("Operation Success. Result:", data);
         toast.success(isEditing ? "Entry Updated" : "Asset Authorized");
         setOpen(false);
         router.refresh();
       }
     } catch (err) {
-      console.error("System Error caught during submission:", err);
-      toast.error("Failed to execute request. Check browser console.");
+      toast.error("Failed to execute request.");
     } finally {
       setLoading(false);
     }
@@ -126,6 +119,7 @@ export function AddAssetModal({
           </DialogTitle>
 
           <div className="space-y-4">
+            {/* Client Email */}
             <div className="space-y-1">
               <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
                 Client Email
@@ -136,7 +130,6 @@ export function AddAssetModal({
                   isEditing ? editData.assigned_email : initialEmail
                 }
                 required
-                // ✅ Locked field during edit
                 readOnly={isEditing}
                 placeholder="client@example.com"
                 className={`w-full border-b border-border py-2 text-sm font-medium outline-none transition-colors bg-transparent ${
@@ -152,6 +145,7 @@ export function AddAssetModal({
               )}
             </div>
 
+            {/* Asset Identity */}
             <div className="space-y-1">
               <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
                 Asset Identity
@@ -165,37 +159,84 @@ export function AddAssetModal({
               />
             </div>
 
+            {/* Asset Class & Timestamp */}
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Amount ($)
+                  Asset Class
                 </label>
                 <input
-                  name="amount"
+                  name="type"
+                  defaultValue={isEditing ? editData.asset_type : ""}
+                  required
+                  placeholder="e.g. Equity"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                  Timestamp
+                </label>
+                <input
+                  name="timestamp"
+                  type="datetime-local"
+                  defaultValue={
+                    isEditing
+                      ? new Date(editData.transaction_date)
+                          .toISOString()
+                          .slice(0, 16)
+                      : ""
+                  }
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                />
+              </div>
+            </div>
+
+            {/* Buy & Sell Price */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                  Buy Price ($)
+                </label>
+                <input
+                  name="buyPrice"
                   type="number"
                   step="0.01"
-                  defaultValue={isEditing ? editData.amount : ""}
+                  defaultValue={isEditing ? editData.buy_price : ""}
                   required
                   placeholder="0.00"
                   className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
                 />
               </div>
-
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Asset Class
+                  Sell Price ($)
                 </label>
-                <select
-                  name="type"
-                  defaultValue={isEditing ? editData.asset_type : "Equity"}
-                  className="w-full border-b border-border py-2 text-sm font-medium bg-transparent outline-none focus:border-primary cursor-pointer"
-                >
-                  <option value="Equity">Equity</option>
-                  <option value="Real Estate">Real Estate</option>
-                  <option value="Fixed Income">Fixed Income</option>
-                  <option value="Commodities">Commodities</option>
-                </select>
+                <input
+                  name="sellPrice"
+                  type="number"
+                  step="0.01"
+                  defaultValue={isEditing ? editData.sell_price : ""}
+                  placeholder="0.00"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                />
               </div>
+            </div>
+
+            {/* Total Amount */}
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                Total Portfolio Value ($)
+              </label>
+              <input
+                name="amount"
+                type="number"
+                step="0.01"
+                defaultValue={isEditing ? editData.amount : ""}
+                required
+                placeholder="0.00"
+                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+              />
             </div>
           </div>
 
