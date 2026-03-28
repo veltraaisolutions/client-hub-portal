@@ -204,7 +204,7 @@ export function AddAssetModal({
                   step="0.01"
                   defaultValue={isEditing ? editData.buy_price : ""}
                   required
-                  placeholder="0.00"
+                  placeholder="£0.00"
                   className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
                 />
               </div>

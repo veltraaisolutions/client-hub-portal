@@ -38,7 +38,7 @@ export default async function RecordsPage({
         <div className="space-y-2">
           <p className="text-primary text-[10px] uppercase tracking-widest font-bold">
             {isMaster && params.email
-              ? `Administering Client: ${targetEmail}`
+              ? `Administering Client: £{targetEmail}`
               : isMaster
                 ? "Master Ledger (Global)"
                 : "Institutional Ledger"}
@@ -101,18 +101,18 @@ export default async function RecordsPage({
                   </td>
                   <td className="p-4">
                     <div className="text-xs">
-                      <span className="text-muted-foreground">B:</span> $
+                      <span className="text-muted-foreground">B:</span> £
                       {Number(item.buy_price || 0).toLocaleString()}
                     </div>
                     {item.sell_price > 0 && (
                       <div className="text-xs">
-                        <span className="text-muted-foreground">S:</span> $
+                        <span className="text-muted-foreground">S:</span> £
                         {Number(item.sell_price).toLocaleString()}
                       </div>
                     )}
                   </td>
                   <td className="p-4 font-bold">
-                    ${Number(item.amount).toLocaleString()}
+                    £{Number(item.amount).toLocaleString("en-GB")}
                   </td>
                   <td className="p-4 text-right pr-8 flex items-center justify-end gap-2">
                     {isMaster ? (
