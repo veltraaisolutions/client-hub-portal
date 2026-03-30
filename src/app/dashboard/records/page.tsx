@@ -68,10 +68,10 @@ export default async function RecordsPage({
                 Date
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
-                Buy / Sell Price
+                Invested / Sold
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
-                Value & Performance
+                Current Balance & P&L
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground text-right pr-8">
                 Actions
@@ -101,19 +101,26 @@ export default async function RecordsPage({
                   </td>
                   <td className="p-4">
                     <div className="text-xs">
-                      <span className="text-muted-foreground">B:</span> £
-                      {Number(item.buy_price || 0).toLocaleString("en-GB")}
+                      <span className="text-muted-foreground">Inv:</span> £
+                      {Number(item.buy_price || 0).toLocaleString("en-GB", {
+                        minimumFractionDigits: 2,
+                      })}
                     </div>
                     {item.sell_price > 0 && (
                       <div className="text-xs">
-                        <span className="text-muted-foreground">S:</span> £
-                        {Number(item.sell_price).toLocaleString("en-GB")}
+                        <span className="text-muted-foreground">Sold:</span> £
+                        {Number(item.sell_price).toLocaleString("en-GB", {
+                          minimumFractionDigits: 2,
+                        })}
                       </div>
                     )}
                   </td>
                   <td className="p-4">
                     <div className="font-bold text-sm">
-                      £{Number(item.amount).toLocaleString("en-GB")}
+                      £
+                      {Number(item.amount).toLocaleString("en-GB", {
+                        minimumFractionDigits: 2,
+                      })}
                     </div>
                     {item.pl_percentage !== undefined &&
                       item.pl_percentage !== null && (

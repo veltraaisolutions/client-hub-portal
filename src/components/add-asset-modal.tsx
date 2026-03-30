@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Plus, Edit2 } from "lucide-react";
 import {
   Dialog,
@@ -23,7 +23,7 @@ interface Investment {
   buy_price: number;
   sell_price?: number;
   transaction_date: string;
-  pl_percentage?: number; 
+  pl_percentage?: number;
 }
 
 export function AddAssetModal({
@@ -40,6 +40,31 @@ export function AddAssetModal({
   const router = useRouter();
   const isEditing = !!editData;
 
+  // States for automatic calculation based on flat amounts
+  const [buyPrice, setBuyPrice] = useState<number>(editData?.buy_price || 0);
+  const [sellPrice, setSellPrice] = useState<number>(editData?.sell_price || 0);
+  const [totalValue, setTotalValue] = useState<number>(editData?.amount || 0);
+  const [plPercentage, setPlPercentage] = useState<number>(
+    editData?.pl_percentage || 0,
+  );
+
+  // Automatic Math Calculation
+  useEffect(() => {
+    if (buyPrice > 0) {
+      // 1. Calculate remaining balance (e.g., 50,000 - 10,000 = 40,000)
+      const calculatedTotal = buyPrice - sellPrice;
+      setTotalValue(calculatedTotal);
+
+      // 2. Calculate P&L % (e.g., Loss of 10,000 on a 50,000 investment is -20%)
+      const profitOrLoss = calculatedTotal - buyPrice;
+      const percentage = (profitOrLoss / buyPrice) * 100;
+      setPlPercentage(percentage);
+    } else {
+      setTotalValue(0);
+      setPlPercentage(0);
+    }
+  }, [buyPrice, sellPrice]);
+
   async function onSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setLoading(true);
@@ -49,11 +74,11 @@ export function AddAssetModal({
     const payload = {
       asset_name: (formData.get("assetName")?.toString() || "").trim(),
       assigned_email: (formData.get("assignedEmail")?.toString() || "").trim(),
-      amount: Number(formData.get("amount")) || 0,
+      amount: totalValue, // Uses calculated state
       asset_type: (formData.get("type")?.toString() || "").trim(),
-      buy_price: Number(formData.get("buyPrice")) || 0,
-      sell_price: Number(formData.get("sellPrice")) || 0,
-      pl_percentage: Number(formData.get("plPercentage")) || 0, 
+      buy_price: buyPrice, 
+      sell_price: sellPrice, // Uses state
+      pl_percentage: plPercentage, 
       transaction_date: formData.get("timestamp")
         ? new Date(formData.get("timestamp") as string).toISOString()
         : new Date().toISOString(),
@@ -140,29 +165,22 @@ export function AddAssetModal({
                     : "focus:border-primary"
                 }`}
               />
-              {isEditing && (
-                <p className="text-[9px] text-amber-600 font-medium uppercase mt-1">
-                  Identity locked for existing record
-                </p>
-              )}
             </div>
 
-            {/* Asset Identity */}
-            <div className="space-y-1">
-              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                Asset Identity
-              </label>
-              <input
-                name="assetName"
-                defaultValue={isEditing ? editData.asset_name : ""}
-                required
-                placeholder="e.g. S&P 500 Index Fund"
-                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
-              />
-            </div>
-
-            {/* Asset Class & Timestamp */}
+            {/* Asset Identity & Class */}
             <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                  Asset Identity
+                </label>
+                <input
+                  name="assetName"
+                  defaultValue={isEditing ? editData.asset_name : ""}
+                  required
+                  placeholder="e.g. Portfolio A"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                />
+              </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
                   Asset Class
@@ -175,36 +193,38 @@ export function AddAssetModal({
                   className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
                 />
               </div>
-              <div className="space-y-1">
-                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Timestamp
-                </label>
-                <input
-                  name="timestamp"
-                  type="datetime-local"
-                  defaultValue={
-                    isEditing
-                      ? new Date(editData.transaction_date)
-                          .toISOString()
-                          .slice(0, 16)
-                      : ""
-                  }
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
-                />
-              </div>
+            </div>
+
+            {/* Timestamp */}
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                Timestamp
+              </label>
+              <input
+                name="timestamp"
+                type="datetime-local"
+                defaultValue={
+                  isEditing
+                    ? new Date(editData.transaction_date)
+                        .toISOString()
+                        .slice(0, 16)
+                    : ""
+                }
+                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+              />
             </div>
 
             {/* Buy & Sell Price */}
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Buy Price (£)
+                  Total Invested (£)
                 </label>
                 <input
-                  name="buyPrice"
                   type="number"
                   step="0.01"
-                  defaultValue={isEditing ? editData.buy_price : ""}
+                  value={buyPrice}
+                  onChange={(e) => setBuyPrice(Number(e.target.value))}
                   required
                   placeholder="0.00"
                   className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
@@ -212,47 +232,42 @@ export function AddAssetModal({
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Sell Price (£)
+                  Amount Sold (£)
                 </label>
                 <input
-                  name="sellPrice"
                   type="number"
                   step="0.01"
-                  defaultValue={isEditing ? editData.sell_price : ""}
+                  value={sellPrice}
+                  onChange={(e) => setSellPrice(Number(e.target.value))}
                   placeholder="0.00"
                   className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
                 />
               </div>
             </div>
 
-            {/* Total Amount & P&L */}
-            <div className="grid grid-cols-2 gap-6">
+            {/* Calculated Results (Updates live based on above inputs) */}
+            <div className="grid grid-cols-2 gap-6 bg-slate-50 p-3 border border-slate-100">
               <div className="space-y-1">
-                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Total Value (£)
+                <label className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">
+                  Auto Total Value
                 </label>
-                <input
-                  name="amount"
-                  type="number"
-                  step="0.01"
-                  defaultValue={isEditing ? editData.amount : ""}
-                  required
-                  placeholder="0.00"
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
-                />
+                <div className="py-2 text-sm font-bold text-primary">
+                  £
+                  {totalValue.toLocaleString("en-GB", {
+                    minimumFractionDigits: 2,
+                  })}
+                </div>
               </div>
               <div className="space-y-1">
-                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  P&L (%)
+                <label className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">
+                  Auto P&L (%)
                 </label>
-                <input
-                  name="plPercentage"
-                  type="number"
-                  step="0.01"
-                  defaultValue={isEditing ? editData.pl_percentage : ""}
-                  placeholder="0.00"
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
-                />
+                <div
+                  className={`py-2 text-sm font-bold ${plPercentage >= 0 ? "text-emerald-600" : "text-red-600"}`}
+                >
+                  {plPercentage >= 0 ? "+" : ""}
+                  {plPercentage.toFixed(2)}%
+                </div>
               </div>
             </div>
           </div>
