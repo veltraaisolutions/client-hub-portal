@@ -38,7 +38,7 @@ export default async function RecordsPage({
         <div className="space-y-2">
           <p className="text-primary text-[10px] uppercase tracking-widest font-bold">
             {isMaster && params.email
-              ? `Administering Client: £{targetEmail}`
+              ? `Administering Client: ${targetEmail}`
               : isMaster
                 ? "Master Ledger (Global)"
                 : "Institutional Ledger"}
@@ -71,7 +71,7 @@ export default async function RecordsPage({
                 Buy / Sell Price
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground">
-                Total Value
+                Value & Performance
               </th>
               <th className="p-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground text-right pr-8">
                 Actions
@@ -102,17 +102,28 @@ export default async function RecordsPage({
                   <td className="p-4">
                     <div className="text-xs">
                       <span className="text-muted-foreground">B:</span> £
-                      {Number(item.buy_price || 0).toLocaleString()}
+                      {Number(item.buy_price || 0).toLocaleString("en-GB")}
                     </div>
                     {item.sell_price > 0 && (
                       <div className="text-xs">
                         <span className="text-muted-foreground">S:</span> £
-                        {Number(item.sell_price).toLocaleString()}
+                        {Number(item.sell_price).toLocaleString("en-GB")}
                       </div>
                     )}
                   </td>
-                  <td className="p-4 font-bold">
-                    £{Number(item.amount).toLocaleString("en-GB")}
+                  <td className="p-4">
+                    <div className="font-bold text-sm">
+                      £{Number(item.amount).toLocaleString("en-GB")}
+                    </div>
+                    {item.pl_percentage !== undefined &&
+                      item.pl_percentage !== null && (
+                        <div
+                          className={`text-xs font-bold ${Number(item.pl_percentage) >= 0 ? "text-emerald-600" : "text-red-600"}`}
+                        >
+                          {Number(item.pl_percentage) >= 0 ? "+" : ""}
+                          {Number(item.pl_percentage).toFixed(2)}%
+                        </div>
+                      )}
                   </td>
                   <td className="p-4 text-right pr-8 flex items-center justify-end gap-2">
                     {isMaster ? (

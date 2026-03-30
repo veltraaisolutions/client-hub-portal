@@ -23,6 +23,7 @@ interface Investment {
   buy_price: number;
   sell_price?: number;
   transaction_date: string;
+  pl_percentage?: number; 
 }
 
 export function AddAssetModal({
@@ -52,6 +53,7 @@ export function AddAssetModal({
       asset_type: (formData.get("type")?.toString() || "").trim(),
       buy_price: Number(formData.get("buyPrice")) || 0,
       sell_price: Number(formData.get("sellPrice")) || 0,
+      pl_percentage: Number(formData.get("plPercentage")) || 0, 
       transaction_date: formData.get("timestamp")
         ? new Date(formData.get("timestamp") as string).toISOString()
         : new Date().toISOString(),
@@ -196,7 +198,7 @@ export function AddAssetModal({
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Buy Price ($)
+                  Buy Price (£)
                 </label>
                 <input
                   name="buyPrice"
@@ -204,13 +206,13 @@ export function AddAssetModal({
                   step="0.01"
                   defaultValue={isEditing ? editData.buy_price : ""}
                   required
-                  placeholder="£0.00"
+                  placeholder="0.00"
                   className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
                 />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Sell Price ($)
+                  Sell Price (£)
                 </label>
                 <input
                   name="sellPrice"
@@ -223,20 +225,35 @@ export function AddAssetModal({
               </div>
             </div>
 
-            {/* Total Amount */}
-            <div className="space-y-1">
-              <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                Total Portfolio Value ($)
-              </label>
-              <input
-                name="amount"
-                type="number"
-                step="0.01"
-                defaultValue={isEditing ? editData.amount : ""}
-                required
-                placeholder="0.00"
-                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
-              />
+            {/* Total Amount & P&L */}
+            <div className="grid grid-cols-2 gap-6">
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                  Total Value (£)
+                </label>
+                <input
+                  name="amount"
+                  type="number"
+                  step="0.01"
+                  defaultValue={isEditing ? editData.amount : ""}
+                  required
+                  placeholder="0.00"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                />
+              </div>
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
+                  P&L (%)
+                </label>
+                <input
+                  name="plPercentage"
+                  type="number"
+                  step="0.01"
+                  defaultValue={isEditing ? editData.pl_percentage : ""}
+                  placeholder="0.00"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                />
+              </div>
             </div>
           </div>
 
