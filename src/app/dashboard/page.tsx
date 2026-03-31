@@ -1,5 +1,5 @@
 import { auth, currentUser } from "@clerk/nextjs/server";
-import { supabase } from "@/lib/supabase";
+import { supabase } from "@/lib/supabase"; 
 import { ShieldCheck, Calculator } from "lucide-react";
 
 export default async function OverviewPage() {
@@ -16,16 +16,28 @@ export default async function OverviewPage() {
   const isMaster = userId ? MASTER_IDS.includes(userId) : false;
 
   // Fetching data using the shared singleton
-  let query = supabase.from("investments").select("amount");
+  // We grab amount and pl_percentage to calculate the real profit
+  let query = supabase.from("investments").select("amount, pl_percentage");
   if (!isMaster && userEmail) {
     query = query.eq("assigned_email", userEmail);
   }
 
   const { data: investments } = await query;
 
-  // Summing up all of the amounts
+  // 1. Summing up all of the amounts for Total Capital
   const totalValue =
     investments?.reduce((sum, inv) => sum + Number(inv.amount), 0) || 0;
+
+  // 2. NEW FORMULA: Calculate total profit based on the saved P&L percentages
+  const totalProfit =
+    investments?.reduce((total, inv) => {
+      const pl = Number(inv.pl_percentage || 0);
+      const principal = Number(inv.amount || 0);
+
+      // Calculate cash profit from percentage: (Principal * Percentage) / 100
+      const cashProfit = (principal * pl) / 100;
+      return total + cashProfit;
+    }, 0) || 0;
 
   return (
     <div className="p-8 space-y-12 max-w-7xl mx-auto bg-background min-h-screen">
@@ -38,7 +50,7 @@ export default async function OverviewPage() {
       </header>
 
       {/* Hero Metrics */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         <StatCard
           label={isMaster ? "Total Managed Capital" : "Portfolio Value"}
           value={`£${totalValue.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
@@ -48,9 +60,15 @@ export default async function OverviewPage() {
           label="Active Assets"
           value={investments?.length || 0}
         />
+        <StatCard
+          label="Total Accrued Profit"
+          value={`£${totalProfit.toLocaleString("en-GB", { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`}
+          // Highlight green if positive, red if negative
+          className={totalProfit >= 0 ? "text-emerald-600" : "text-red-600"}
+        />
       </div>
 
-      {/* Option 1: Financial Ledger Methodology */}
+      {/* Financial Ledger Methodology */}
       <section className="border border-border bg-white">
         <div className="bg-primary p-3 flex items-center gap-3">
           <ShieldCheck className="size-3.5 text-white" />
@@ -100,10 +118,12 @@ function StatCard({
   label,
   value,
   isPrimary,
+  className = "",
 }: {
   label: string;
   value: string | number;
   isPrimary?: boolean;
+  className?: string;
 }) {
   return (
     <div
@@ -113,7 +133,9 @@ function StatCard({
         {label}
       </p>
       <p
-        className={`text-4xl font-bold tracking-tighter ${isPrimary ? "text-primary" : "text-foreground"}`}
+        className={`text-4xl font-bold tracking-tighter ${
+          isPrimary ? "text-primary" : className || "text-foreground"
+        }`}
       >
         {value}
       </p>

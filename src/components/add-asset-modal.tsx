@@ -40,27 +40,25 @@ export function AddAssetModal({
   const router = useRouter();
   const isEditing = !!editData;
 
-  // States for automatic calculation based on flat amounts
+  // We use "amount" for the flat cash invested
+  const [totalInvested, setTotalInvested] = useState<number>(
+    editData?.amount || 0,
+  );
+
+  // We use "buy_price" and "sell_price" for the stock prices
   const [buyPrice, setBuyPrice] = useState<number>(editData?.buy_price || 0);
   const [sellPrice, setSellPrice] = useState<number>(editData?.sell_price || 0);
-  const [totalValue, setTotalValue] = useState<number>(editData?.amount || 0);
+
   const [plPercentage, setPlPercentage] = useState<number>(
     editData?.pl_percentage || 0,
   );
 
-  // Automatic Math Calculation
+  // Accurate Profit/Loss calculation based on execution prices
   useEffect(() => {
-    if (buyPrice > 0) {
-      // 1. Calculate remaining balance (e.g., 50,000 - 10,000 = 40,000)
-      const calculatedTotal = buyPrice - sellPrice;
-      setTotalValue(calculatedTotal);
-
-      // 2. Calculate P&L % (e.g., Loss of 10,000 on a 50,000 investment is -20%)
-      const profitOrLoss = calculatedTotal - buyPrice;
-      const percentage = (profitOrLoss / buyPrice) * 100;
+    if (buyPrice > 0 && sellPrice > 0) {
+      const percentage = ((sellPrice - buyPrice) / buyPrice) * 100;
       setPlPercentage(percentage);
     } else {
-      setTotalValue(0);
       setPlPercentage(0);
     }
   }, [buyPrice, sellPrice]);
@@ -74,11 +72,11 @@ export function AddAssetModal({
     const payload = {
       asset_name: (formData.get("assetName")?.toString() || "").trim(),
       assigned_email: (formData.get("assignedEmail")?.toString() || "").trim(),
-      amount: totalValue, // Uses calculated state
+      amount: totalInvested, // Flat cash amount
       asset_type: (formData.get("type")?.toString() || "").trim(),
-      buy_price: buyPrice, 
-      sell_price: sellPrice, // Uses state
-      pl_percentage: plPercentage, 
+      buy_price: buyPrice, // Stock buy price
+      sell_price: sellPrice, // Stock sell price
+      pl_percentage: plPercentage,
       transaction_date: formData.get("timestamp")
         ? new Date(formData.get("timestamp") as string).toISOString()
         : new Date().toISOString(),
@@ -133,9 +131,6 @@ export function AddAssetModal({
 
       <DialogContent className="rounded-none border-none max-w-md bg-white p-0 shadow-2xl">
         <div className="h-2 bg-primary w-full" />
-        <div className="sr-only">
-          <DialogDescription>Asset management interface.</DialogDescription>
-        </div>
 
         <form
           onSubmit={onSubmit}
@@ -158,8 +153,7 @@ export function AddAssetModal({
                 }
                 required
                 readOnly={isEditing}
-                placeholder="client@example.com"
-                className={`w-full border-b border-border py-2 text-sm font-medium outline-none transition-colors bg-transparent ${
+                className={`w-full border-b border-border py-2 text-sm font-medium outline-none bg-transparent ${
                   isEditing
                     ? "opacity-60 cursor-not-allowed border-dashed"
                     : "focus:border-primary"
@@ -177,8 +171,8 @@ export function AddAssetModal({
                   name="assetName"
                   defaultValue={isEditing ? editData.asset_name : ""}
                   required
-                  placeholder="e.g. Portfolio A"
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                  placeholder="e.g. Microsoft"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent"
                 />
               </div>
               <div className="space-y-1">
@@ -190,49 +184,45 @@ export function AddAssetModal({
                   defaultValue={isEditing ? editData.asset_type : ""}
                   required
                   placeholder="e.g. Equity"
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent"
                 />
               </div>
             </div>
 
-            {/* Timestamp */}
+            {/* Total Capital Invested */}
             <div className="space-y-1">
               <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                Timestamp
+                Total Invested (£)
               </label>
               <input
-                name="timestamp"
-                type="datetime-local"
-                defaultValue={
-                  isEditing
-                    ? new Date(editData.transaction_date)
-                        .toISOString()
-                        .slice(0, 16)
-                    : ""
-                }
-                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                type="number"
+                step="0.01"
+                value={totalInvested}
+                onChange={(e) => setTotalInvested(Number(e.target.value))}
+                required
+                placeholder="0.00"
+                className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent"
               />
             </div>
 
-            {/* Buy & Sell Price */}
+            {/* Execution Prices (Reusing buy_price and sell_price) */}
             <div className="grid grid-cols-2 gap-6">
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Total Invested (£)
+                  Buy Price @ (£)
                 </label>
                 <input
                   type="number"
                   step="0.01"
                   value={buyPrice}
                   onChange={(e) => setBuyPrice(Number(e.target.value))}
-                  required
                   placeholder="0.00"
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent"
                 />
               </div>
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-muted-foreground tracking-widest">
-                  Amount Sold (£)
+                  Sell Price @ (£)
                 </label>
                 <input
                   type="number"
@@ -240,20 +230,20 @@ export function AddAssetModal({
                   value={sellPrice}
                   onChange={(e) => setSellPrice(Number(e.target.value))}
                   placeholder="0.00"
-                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent transition-colors"
+                  className="w-full border-b border-border py-2 text-sm font-medium outline-none focus:border-primary bg-transparent"
                 />
               </div>
             </div>
 
-            {/* Calculated Results (Updates live based on above inputs) */}
+            {/* Auto Calculations Box */}
             <div className="grid grid-cols-2 gap-6 bg-slate-50 p-3 border border-slate-100">
               <div className="space-y-1">
                 <label className="text-[10px] uppercase font-bold text-slate-500 tracking-widest">
-                  Auto Total Value
+                  Total Value
                 </label>
                 <div className="py-2 text-sm font-bold text-primary">
                   £
-                  {totalValue.toLocaleString("en-GB", {
+                  {totalInvested.toLocaleString("en-GB", {
                     minimumFractionDigits: 2,
                   })}
                 </div>
