@@ -116,7 +116,7 @@ export const FOOTER_DATA = [
         name: "Our Offices",
         slug: "our-offices",
         content:
-          "Stonepeak Partners (UK) LLP provides a global bridge to the UAE and beyond. Our physical presence ensures we navigate complex global market cycles with the local expertise required for seamless asset transfers and regulatory compliance.",
+          "Stonepeak Partners (UK) LLP provides a global bridge to the UK and beyond. Our physical presence ensures we navigate complex global market cycles with the local expertise required for seamless asset transfers and regulatory compliance.",
         heroImage:
           "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=80",
         timelineImages: [
