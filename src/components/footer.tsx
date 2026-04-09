@@ -62,13 +62,25 @@ export function Footer() {
         <div className="space-y-6 text-[11px] leading-relaxed text-zinc-500 max-w-5xl">
           <p>
             © 2026 Stonepeak Partners Global Infrastructure. All rights
-            reserved. Stonepeak Partners is a trademark of Stonepeak Partners
-            Global Infrastructure LLC.
+            reserved.{" "}
+            <span className="text-zinc-200 font-semibold">
+              Stonepeak Partners (UK) LLP
+            </span>{" "}
+            is a limited liability partnership registered in England and Wales
+            with company number{" "}
+            <span className="text-zinc-200 font-semibold">OC430453</span>.
+            Stonepeak Partners (UK) LLP is authorised and regulated by the
+            Financial Conduct Authority (FCA firm reference number:{" "}
+            <span className="text-zinc-200 font-semibold">924108</span>).
           </p>
           <p>
-            <b>Professional Investors Only.</b> This website is intended for
-            professional investors as defined by local jurisdiction. Past
-            performance is not a guarantee of future results.
+            <b className="text-zinc-400">Professional Investors Only.</b> This
+            website is intended for professional investors as defined by local
+            jurisdiction in the{" "}
+            <span className="text-zinc-300">
+              United Arab Emirates (ex ADGM)
+            </span>
+            . Past performance is not a guarantee of future results.
           </p>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-bold uppercase tracking-widest pt-4">
