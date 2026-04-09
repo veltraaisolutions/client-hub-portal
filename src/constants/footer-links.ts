@@ -6,7 +6,7 @@ export const FOOTER_DATA = [
         name: "Investment Strategies",
         slug: "investment-strategies",
         content:
-          "Our investment strategies focus on long-term growth and risk mitigation across every market cycle.",
+          "Harness the Performance Edge: Stonepeak Partners delivers institutional execution designed to help your returns compound. From 2023–2025, our individual clients saw average annual returns of 24.30% through smarter market timing and lower overhead.",
         heroImage:
           "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80",
         timelineImages: [
@@ -21,7 +21,7 @@ export const FOOTER_DATA = [
         name: "Alternatives",
         slug: "alternatives",
         content:
-          "Access to private equity, hedge funds, and real estate for institutional portfolios seeking diversification.",
+          "Diversify beyond the S&P 500 with institutional-grade alternatives. We provide direct access to 170+ global markets from a single platform, ensuring your portfolio scales with the same efficiency as the world's largest hedge funds.",
         heroImage:
           "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80",
         timelineImages: [
@@ -36,7 +36,7 @@ export const FOOTER_DATA = [
         name: "Asset-Based Finance",
         slug: "asset-based-finance",
         content:
-          "Financing solutions secured by high-quality underlying assets including real estate, infrastructure and receivables.",
+          "Maximize capital efficiency with margin rates up to 55% lower than industry averages. Our asset-based financing solutions allow you to leverage high-quality infrastructure and receivables without the burden of excessive interest costs.",
         heroImage:
           "https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=1400&q=80",
         timelineImages: [
@@ -51,7 +51,7 @@ export const FOOTER_DATA = [
         name: "Sustainable Investing",
         slug: "sustainable-investing",
         content:
-          "Integrating ESG factors across our investment process to drive positive global impact and long-term value.",
+          "Invest for the future with transparency. While others hide costs in 'ESG spreads,' Stonepeak Partners competes on full economics—integrating global sustainability goals with zero platform fees and smarter execution quality.",
         heroImage:
           "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1400&q=80",
         timelineImages: [
@@ -71,7 +71,7 @@ export const FOOTER_DATA = [
         name: "About Us",
         slug: "who-we-are",
         content:
-          "Stonepeak Partners Hub is a premier global investment manager dedicated to infrastructure excellence and long-term value creation.",
+          "Trusted by over 4 million clients, Stonepeak Partners is a proven global leader. Operating under strict regulatory oversight (FCA: 924108), we provide the scale and stability of an S&P 500 member with the agility of a fintech innovator.",
         heroImage:
           "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80",
         timelineImages: [
@@ -86,7 +86,7 @@ export const FOOTER_DATA = [
         name: "Our Process",
         slug: "our-process",
         content:
-          "A rigorous, data-driven investment approach honed over five decades of navigating complex global market cycles.",
+          "Our SmartRouting technology seeks the best available price across market makers and exchanges. We don't just execute trades; we improve prices, ensuring your capital is managed with professional precision and transparent economics.",
         heroImage:
           "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
         timelineImages: [
@@ -101,7 +101,7 @@ export const FOOTER_DATA = [
         name: "Experts",
         slug: "experts",
         content:
-          "Meet our global team of specialists — economists, portfolio managers and analysts — dedicated to your financial goals.",
+          "Our team executes over 4 million trades daily. By moving your assets to Stonepeak Partners, you gain access to specialists who prioritize execution quality and lower financing costs over traditional marketing claims.",
         heroImage:
           "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80",
         timelineImages: [
@@ -116,7 +116,7 @@ export const FOOTER_DATA = [
         name: "Our Offices",
         slug: "our-offices",
         content:
-          "Our global footprint spans 24 offices, ensuring we are wherever our clients need us most — from New York to Singapore.",
+          "Stonepeak Partners (UK) LLP provides a global bridge to the UAE and beyond. Our physical presence ensures we navigate complex global market cycles with the local expertise required for seamless asset transfers and regulatory compliance.",
         heroImage:
           "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=80",
         timelineImages: [
@@ -131,7 +131,7 @@ export const FOOTER_DATA = [
         name: "Careers",
         slug: "careers",
         content:
-          "Explore opportunities to join our elite team of financial professionals. Build a career where you learn, grow and thrive.",
+          "Join a firm that scales strategies into global impact. Stonepeak Partners offers a performance-driven environment for professionals who believe in transparency, low-cost institutional trading, and the power of compounding returns.",
         heroImage:
           "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80",
         timelineImages: [
@@ -151,7 +151,7 @@ export const FOOTER_DATA = [
         name: "Resource Centre",
         slug: "resource-centre",
         content:
-          "A centralized hub for all technical documentation, whitepapers, fund factsheets and research reports.",
+          "Access the full economics of trading. Our resource center provides clear pricing schedules, margin calculators, and technical guides for both Stonepeak LITE (Occasional) and Stonepeak PRO (Active) account structures.",
         heroImage:
           "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400&q=80",
         timelineImages: [
@@ -166,7 +166,7 @@ export const FOOTER_DATA = [
         name: "Education & Engagement",
         slug: "education-and-engagement",
         content:
-          "Workshops, webinars and programmes designed to simplify complex financial structures for institutional clients.",
+          "Understand why 'free trades' aren't always free. We educate our clients on execution quality, the real cost of uninvested cash, and how earning up to 3.14% interest on idle funds can drastically impact long-term wealth.",
         heroImage:
           "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80",
         timelineImages: [
@@ -181,7 +181,7 @@ export const FOOTER_DATA = [
         name: "Ways to Invest",
         slug: "ways-to-invest",
         content:
-          "Information on account types, fee structures and the institutional onboarding process for new clients.",
+          "Switch without disruption. Our seamless digital transfer process allows you to move assets without selling positions, ensuring a tax-neutral transition to a platform that offers 170+ global markets and commission-free US stock trades.",
         heroImage:
           "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=1400&q=80",
         timelineImages: [
@@ -201,7 +201,7 @@ export const FOOTER_DATA = [
         name: "Latest Insights",
         slug: "latest-insights",
         content:
-          "The latest market updates, economic research and leadership pieces from our world-class team of economists.",
+          "Stay ahead with our analysis on why Stonepeak Partners' margin rates and price improvement technologies outperform standard retail brokers. Discover the macroeconomic trends driving our 24.30% average annual return.",
         heroImage:
           "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80",
         timelineImages: [
@@ -216,7 +216,7 @@ export const FOOTER_DATA = [
         name: "Market Commentary",
         slug: "market-commentary",
         content:
-          "Weekly breakdowns of global market performance, sector rotation and macroeconomic developments.",
+          "Weekly breakdowns on global market access. We analyze FX conversion costs, global spreads, and liquidity across 170 markets, helping you understand how Stonepeak Partners keeps more of your returns invested.",
         heroImage:
           "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1400&q=80",
         timelineImages: [
@@ -231,7 +231,7 @@ export const FOOTER_DATA = [
         name: "Secular Outlook",
         slug: "secular-outlook",
         content:
-          "Our long-term 10-year view on global economic shifts, structural trends and investment implications.",
+          "A decade-long view on low-cost financing and global compounding. Learn why shifting to a transparent pricing model today is essential for achieving superior market results over the next 10 years.",
         heroImage:
           "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80",
         timelineImages: [
@@ -251,7 +251,7 @@ export const FOOTER_DATA = [
         name: "Legal",
         slug: "legal",
         content:
-          "Corporate legal disclosures and regulatory filings for Stonepeak Partners Global and its subsidiaries.",
+          "Regulatory disclosures for Stonepeak Partners (UK) LLP. As an FCA-regulated firm (924108) and S&P 500 member, we adhere to the highest standards of global transparency and capital security.",
         heroImage:
           "https://images.unsplash.com/photo-1589829545856-d10d557cf95f?w=1400&q=80",
         timelineImages: [
@@ -266,7 +266,7 @@ export const FOOTER_DATA = [
         name: "Privacy Policy",
         slug: "privacy-policy",
         content:
-          "How we collect, store and protect your personal data in accordance with GDPR and international privacy laws.",
+          "Data protection for our 4 million+ global clients. We employ bank-grade security and transparent data practices to ensure your assets and identity remain secure across all 170+ markets we serve.",
         heroImage:
           "https://images.unsplash.com/photo-1563986768494-4dee2763ff3f?w=1400&q=80",
         timelineImages: [
@@ -281,7 +281,7 @@ export const FOOTER_DATA = [
         name: "Cookie Policy",
         slug: "cookie-policy",
         content:
-          "Details on how we use cookies and similar tracking technologies to improve your browsing experience.",
+          "Optimizing your platform experience. Our cookies assist in managing secure sessions for Stonepeak PRO and LITE account holders, ensuring seamless global market access without compromising privacy.",
         heroImage:
           "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=1400&q=80",
         timelineImages: [
@@ -296,7 +296,7 @@ export const FOOTER_DATA = [
         name: "Terms of Use",
         slug: "terms-of-use",
         content:
-          "The terms and conditions governing the use of our digital platforms, websites and client-facing services.",
+          "The governing terms for Stonepeak Partners' digital ecosystem. Including policies on SmartRouting, margin account requirements, and global market participation for professional investors.",
         heroImage:
           "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1400&q=80",
         timelineImages: [
