@@ -1,30 +1,23 @@
 import { FOOTER_DATA } from "@/constants/footer-links";
 import { notFound } from "next/navigation";
 import Image from "next/image";
-import {
-  Globe,
-  Shield,
-  Users,
-  Clock,
-  // ChevronRight,
-  ArrowUpRight,
-} from "lucide-react";
+import { Globe, Shield, Users, Clock, ArrowUpRight } from "lucide-react";
 
 const TIMELINE_ITEMS = [
   {
-    year: "1971",
-    title: "Stonepeak Partners Founded",
-    desc: "Established with a singular vision: to deliver institutional-grade investment solutions for the modern era.",
+    year: "Foundation",
+    title: "Built on Alignment",
+    desc: "Stonepeak Partners was established with a simple model: no management fees, and we only succeed when our clients do.",
   },
   {
-    year: "1980s | $185MM AUM",
-    title: "Pioneered a Total Return Approach",
-    desc: "Broke new ground in fixed income investing that created a new standard for active portfolio management.",
+    year: "Growth | £300M AUM",
+    title: "Institutional-Grade Strategies",
+    desc: "Expanded our managed account service, giving clients full ownership of capital with active professional management and full transparency.",
   },
   {
-    year: "1990s | $10.1BN AUM",
-    title: "Embraced Financial Futures",
-    desc: "Developed the first enhanced equity strategy based on a rules-driven, disciplined investment framework.",
+    year: "Today | FCA Regulated",
+    title: "Transparent, Performance-Led",
+    desc: "Authorised and regulated by the FCA, with FSCS protection up to £120,000. Client funds protected. Every position is intentional.",
   },
 ];
 
@@ -128,23 +121,23 @@ export default async function InfoPage({ params }: any) {
             {[
               {
                 Icon: Clock,
-                stat: "50+ Years",
-                sub: "Experience helping investors navigate even the toughest markets.",
+                stat: "£300M+ AUM",
+                sub: "Assets under management, entrusted to us by our clients.",
               },
               {
                 Icon: Shield,
-                stat: "2.26TN AUM",
-                sub: "Assets Under Management — entrusted to us by our clients.",
+                stat: "FCA Regulated",
+                sub: "Authorised and regulated by the Financial Conduct Authority.",
               },
               {
                 Icon: Globe,
-                stat: "24 Global Offices",
-                sub: "Located throughout the Americas, Europe and Asia.",
+                stat: "FSCS Protected",
+                sub: "Client funds protected up to £120,000, subject to eligibility.",
               },
               {
                 Icon: Users,
-                stat: "3,195+",
-                sub: "Employees around the world.",
+                stat: "0% Mgmt Fee",
+                sub: "Performance fee of 20% on profits only. We only earn when you do.",
               },
             ].map(({ Icon, stat, sub }, i) => (
               <div
@@ -198,15 +191,15 @@ export default async function InfoPage({ params }: any) {
               {[
                 {
                   title: "Rigorous Research",
-                  desc: "A dedicated team of economists and analysts driving disciplined, data-backed investment decisions.",
+                  desc: "Fundamental analysis, technical indicators, macroeconomic trends, and market sentiment — every position is backed by data and disciplined execution.",
                 },
                 {
                   title: "Risk Management",
-                  desc: "Proprietary frameworks built to navigate complexity, reduce drawdowns, and protect capital.",
+                  desc: "Capital preservation is our first priority. Proprietary risk controls actively monitor and adjust positions in real time to mitigate downside risk.",
                 },
                 {
-                  title: "Global Perspective",
-                  desc: "On-the-ground intelligence from 24 offices spanning every major financial hub worldwide.",
+                  title: "Aligned Incentives",
+                  desc: "No management fees. A 20% performance fee on profits only. We only succeed when our clients do — full stop.",
                 },
               ].map(({ title, desc }) => (
                 <div
@@ -389,8 +382,10 @@ export default async function InfoPage({ params }: any) {
               className="text-blue-200 leading-relaxed mb-8"
               style={{ fontSize: 17 }}
             >
-              Find a career where you can learn, grow and thrive. Be part of a
-              diverse team working together to power the future of investing.
+              We are always looking for driven individuals with a passion for
+              markets. Work alongside experienced professionals, gain exposure
+              to live trading environments, and be rewarded based on
+              performance. We value ambition, discipline, and results.
             </p>
             <a
               href="#"
@@ -493,10 +488,6 @@ export default async function InfoPage({ params }: any) {
                     }}
                   >
                     <span className="font-bold text-[#001a40]">{item}</span>
-                    {/* <ChevronRight
-                      size={20}
-                      color="#1d4ed8"
-                    /> */}
                   </div>
                 ),
               )}
@@ -535,7 +526,11 @@ export default async function InfoPage({ params }: any) {
             This information regarding <strong>{pageData.name}</strong> is
             institutional content for Stonepeak Partners Global. All information
             is strictly for professional investors. Past performance is not a
-            guarantee or a reliable indicator of future results.
+            guarantee or a reliable indicator of future results. Stonepeak
+            Partners is authorised and regulated by the Financial Conduct
+            Authority (FCA). Client funds are protected under the Financial
+            Services Compensation Scheme (FSCS) up to £120,000, subject to
+            eligibility.
           </p>
         </div>
       </section>
