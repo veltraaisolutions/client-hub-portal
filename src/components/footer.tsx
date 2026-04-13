@@ -13,8 +13,8 @@ export function Footer() {
   return (
     <footer className="bg-[#001a33] text-white pt-16 pb-8 px-6">
       <div className="max-w-7xl mx-auto">
-        {/* MAIN NAVIGATION GRID (4 Columns) */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-12 border-b border-white/10 pb-16">
+        {/* MAIN NAVIGATION GRID (3 Columns) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-12 border-b border-white/10 pb-16">
           {mainSections.map((section) => (
             <div
               key={section.category}
@@ -31,7 +31,6 @@ export function Footer() {
                       className="hover:underline underline-offset-4 opacity-80 hover:opacity-100 transition-all flex items-center"
                     >
                       {link.name}
-                      {/* Show arrow icon for careers to match PIMCO style */}
                       {link.slug === "careers" && (
                         <ArrowUpRight className="inline h-3 w-3 ml-1 opacity-50" />
                       )}

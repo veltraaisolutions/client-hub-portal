@@ -3,25 +3,68 @@ export const FOOTER_DATA = [
     category: "Investments",
     links: [
       {
-        name: "Investment Strategies",
-        slug: "investment-strategies",
+        name: "Bespoke Portfolio Management",
+        slug: "bespoke-portfolio-management",
         content:
-          "At StonePeak Partners, our investment strategy is rooted in active management, deep market analysis, and disciplined execution. We focus primarily on global equities and listed securities, leveraging fundamental analysis, technical indicators, macroeconomic trends, and market sentiment and liquidity flows. Our team actively monitors positions, adjusting exposure in real time to capture opportunities and mitigate downside risk. Core principles: Capital Preservation First, High-Conviction Positions, Dynamic Risk Allocation, and Liquidity-Focused Investments. We do not believe in passive tracking. Every position is intentional.",
+          "Our Bespoke Portfolio Service (BPS) is designed to simplify complex investment decisions—offering a fully customised investment solution tailored to each client's unique goals, circumstances, and preferences. Whether your needs are straightforward or highly complex, we create portfolios that are flexible, responsive, and designed to evolve with you over time.",
         heroImage:
-          "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80",
+          "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
         timelineImages: [
-          "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=600&q=80",
-          "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=600&q=80",
           "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&q=80",
+          "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=600&q=80",
+          "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600&q=80",
         ],
         contactImage:
           "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=800&q=80",
+        fullContent: `
+A portfolio built around you
+
+Building wealth involves complex decisions. Our Bespoke Portfolio Service (BPS) is designed to simplify that process—offering a fully customised investment solution tailored to each client's unique goals, circumstances, and preferences.
+
+Whether your needs are straightforward or highly complex, we create portfolios that are flexible, responsive, and designed to evolve with you over time.
+
+How it works
+
+At the heart of our service is a dedicated investment manager who works closely with you to design and manage your portfolio.
+
+We follow a structured, collaborative approach:
+
+Understanding your needs — We begin by gaining a clear picture of your objectives, time horizon, and attitude to risk.
+
+Designing your strategy — Based on your requirements, we select an appropriate investment strategy aligned to your goals.
+
+Building your portfolio — Your portfolio is constructed to reflect your agreed risk profile, income needs, and investment preferences.
+
+Ongoing monitoring — We continuously monitor performance to ensure your portfolio remains aligned with your objectives.
+
+Active management — We make timely adjustments in response to market conditions and changes in your circumstances.
+
+Transparent reporting — You receive regular, clear updates on performance, holdings, and portfolio activity.
+
+The benefits of a bespoke approach
+
+Tailored to your life: Portfolios designed around your personal goals and financial situation. Adaptable to life events and changing circumstances. Suitable for complex requirements, including income planning and multi-account structures.
+
+Tax-aware investing: Use of tax-efficient structures and allowances. Portfolio construction designed to optimise after-tax outcomes. Flexible cash flow and income planning.
+
+Efficient and flexible management: Discretionary management with timely decision-making. Flexible rebalancing based on market conditions. Phased investment options to help manage market entry risk.
+
+Consolidation and simplicity: Bring multiple holdings into one streamlined portfolio. Simplified oversight and administration. Clear, consolidated reporting.
+
+A broader investment universe
+
+Our Bespoke Portfolio Service provides access to a wide range of investment opportunities, including direct equities and bonds, collective investments, investment trusts, structured products, and real estate investment trusts (REITs).
+
+A partnership approach
+
+We work as an extension of your team—combining investment expertise with a collaborative, relationship-led approach. Our aim is simple: to help you achieve your financial goals with confidence, clarity, and control.
+        `,
       },
       {
-        name: "Alternatives",
-        slug: "alternatives",
+        name: "Infrastructure Opportunities",
+        slug: "infrastructure-opportunities",
         content:
-          "Our alternatives strategies provide exposure to opportunities outside conventional equity investing. These include event-driven trading, special situations, short-term tactical trades, and market dislocations. Alternative strategies are designed to enhance portfolio diversification, reduce correlation to broader markets, and capture asymmetric return opportunities.",
+          "Infrastructure sits at the heart of the global economy—powering homes, connecting communities, enabling trade, and supporting long-term economic growth. At Stonepeak Partners, we provide access to infrastructure opportunities that go beyond traditional markets—focusing on essential assets with strong fundamentals, long-term demand, and the potential to deliver resilient returns.",
         heroImage:
           "https://images.unsplash.com/photo-1486325212027-8081e485255e?w=1400&q=80",
         timelineImages: [
@@ -31,27 +74,41 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=800&q=80",
-      },
-      {
-        name: "Asset-Based Finance",
-        slug: "asset-based-finance",
-        content:
-          "We offer asset-based financing strategies designed to generate consistent returns supported by tangible collateral. These opportunities may include structured lending, asset-backed transactions, and short-duration financing deals. Key Benefits: lower correlation to equity markets, defined risk structures, and predictable income streams. All opportunities undergo strict due diligence and risk assessment.",
-        heroImage:
-          "https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=1400&q=80",
-        timelineImages: [
-          "https://images.unsplash.com/photo-1565372195458-9de0b320ef04?w=600&q=80",
-          "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&q=80",
-          "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=600&q=80",
-        ],
-        contactImage:
-          "https://images.unsplash.com/photo-1497366216548-37526070297c?w=800&q=80",
+        fullContent: `
+Investing in the assets that power everyday life
+
+Infrastructure sits at the heart of the global economy—powering homes, connecting communities, enabling trade, and supporting long-term economic growth.
+
+At Stonepeak Partners, we provide access to infrastructure opportunities that go beyond traditional markets—focusing on essential assets with strong fundamentals, long-term demand, and the potential to deliver resilient returns.
+
+Why infrastructure?
+
+Infrastructure investments are supported by powerful structural trends—from digitalisation and energy transition to global supply chains and urbanisation.
+
+These assets typically provide long-term, predictable cash flows, inflation-linked income characteristics, lower correlation to traditional asset classes, and exposure to essential services with enduring demand.
+
+Key investment sectors
+
+Digital infrastructure — We invest in assets that enable global connectivity and digital growth, including data centres, fibre networks, and communications infrastructure—supporting the rapid expansion of cloud computing, 5G, and data consumption.
+
+Energy & energy transition — Our focus includes renewable energy, energy storage, and transitional energy infrastructure—supporting decarbonisation while maintaining reliable, scalable energy systems.
+
+Transport & logistics — We invest in infrastructure that facilitates the movement of goods, people, and resources—supporting supply chains, trade, and economic activity across global markets.
+
+Sustainability at the core
+
+Infrastructure plays a central role in addressing global challenges—from climate change to digital inclusion. We integrate sustainability into our investment approach by supporting assets that contribute to decarbonisation and efficiency, working with management teams to improve environmental and social outcomes, and embedding ESG considerations into investment decision-making.
+
+Access through bespoke portfolios
+
+Infrastructure opportunities are accessed through our Bespoke Portfolio Service, allowing us to integrate infrastructure alongside traditional and alternative assets, align investments with your risk profile and income requirements, and provide diversified exposure within a single, tailored portfolio.
+        `,
       },
       {
         name: "Sustainable Investing",
         slug: "sustainable-investing",
         content:
-          "StonePeak Partners integrates environmental, social, and governance (ESG) considerations into our investment process. We aim to avoid sectors with long-term structural risk, allocate capital to sustainable and forward-looking businesses, and promote responsible corporate practices. Sustainable investing is not a constraint — it is a long-term value driver.",
+          "Sustainable investing is no longer a niche consideration—it is an essential part of building resilient, forward-looking portfolios. At Stonepeak Partners, we help clients align their investments with their values without compromising on long-term financial objectives.",
         heroImage:
           "https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=1400&q=80",
         timelineImages: [
@@ -61,6 +118,33 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1542601906897-ecd69ef9b04e?w=800&q=80",
+        fullContent: `
+Investing for returns—and for impact
+
+Sustainable investing is no longer a niche consideration—it is an essential part of building resilient, forward-looking portfolios.
+
+At Stonepeak Partners, we help clients align their investments with their values without compromising on long-term financial objectives. Our approach combines disciplined portfolio construction with a clear focus on environmental, social, and governance (ESG) considerations.
+
+Our Approach
+
+We recognise that sustainability means different things to different investors. That's why our approach is designed to be flexible and tailored. We work with you to understand your priorities—whether that's reducing exposure to certain sectors, supporting positive change, or integrating ESG considerations across your entire portfolio.
+
+Responsible Investment Strategies
+
+Advance Strategy — Focuses on investing in companies, sectors, and themes that are driving positive environmental and social change—such as renewable energy, sustainable infrastructure, and innovation-led industries.
+
+Avoid Strategy — Excludes exposure to sectors that may not align with your values, such as armaments, tobacco, gambling, alcohol, or other controversial industries.
+
+These strategies can be applied individually or combined, ensuring your portfolio reflects what matters most to you.
+
+Integrating ESG into portfolios
+
+Sustainable investing is not just about exclusions—it's about making better-informed investment decisions. We integrate ESG considerations into our investment process by assessing risks and opportunities linked to environmental and social factors, evaluating governance standards and long-term business sustainability, and incorporating ESG insights into portfolio construction and ongoing monitoring.
+
+Balancing impact and performance
+
+Our priority is to deliver strong, risk-adjusted returns over the long term. Sustainable investing is fully integrated into this objective—not treated as a trade-off. By combining ESG insight, active management, and broad investment access, we aim to enhance portfolio resilience, identify forward-looking investment opportunities, and manage long-term risks more effectively.
+        `,
       },
     ],
   },
@@ -71,7 +155,7 @@ export const FOOTER_DATA = [
         name: "About Us",
         slug: "who-we-are",
         content:
-          "StonePeak Partners is a UK-based investment management firm overseeing £300 million in client capital. We are authorised and regulated by the Financial Conduct Authority (FCA) and committed to delivering transparent, performance-driven investment solutions. Our model is simple: no management fees, and we only succeed when our clients do.",
+          "Stonepeak Partners is an independent, financially strong wealth management firm with over 30 years of experience supporting advisers and their clients. We combine deep investment expertise with a highly personalised approach—working closely with advisers and clients to deliver outcomes aligned with their goals, values, and evolving needs.",
         heroImage:
           "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?w=1400&q=80",
         timelineImages: [
@@ -81,12 +165,53 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1497366811353-6870744d04b2?w=800&q=80",
+        fullContent: `
+Realising ambitions. Securing futures.
+
+At Stonepeak Partners, we are dedicated to helping clients build, manage, and protect their wealth through tailored investment solutions and long-term partnerships.
+
+We combine deep investment expertise with a highly personalised approach—working closely with advisers and clients to deliver outcomes aligned with their goals, values, and evolving needs.
+
+Who we are
+
+Stonepeak Partners is an independent, financially strong wealth management firm with over 30 years of experience supporting advisers and their clients.
+
+We understand the challenges of today's investment landscape because we work alongside you—navigating market complexity, regulatory change, and shifting client expectations.
+
+Our role is simple: to provide the insight, structure, and support needed to help you deliver the best possible outcomes.
+
+What we do
+
+We specialise in delivering bespoke investment strategies through our core offering—the Bespoke Portfolio Service (BPS): a fully customised portfolio solution designed around individual client objectives, risk profiles, and long-term ambitions.
+
+Every portfolio is actively managed and continuously aligned to client needs—whether focused on growth, income, capital preservation, or a combination of outcomes.
+
+Alongside this, we provide access to infrastructure and real assets, equities and fixed income, alternative investments and structured solutions, and responsible and sustainable investment strategies.
+
+Our approach
+
+We believe successful investing starts with understanding people—not just markets. That's why our approach is built on close collaboration, combining personal relationships with institutional-quality investment processes.
+
+Client-first thinking — Every decision begins with your objectives, priorities, and circumstances.
+
+Disciplined investment framework — Our Centralised Investment Proposition provides consistency, rigour, and robust portfolio construction.
+
+Active management — We continuously monitor portfolios, making informed adjustments as markets and client needs evolve.
+
+Transparency and communication — Clear reporting and ongoing dialogue ensure you remain informed and confident at every stage.
+
+Why Stonepeak Partners
+
+Independent and financially strong. Over three decades of experience. Tailored, client-centric investment solutions. Institutional-quality research and frameworks. A collaborative, relationship-led approach.
+
+Let's build lasting success together.
+        `,
       },
       {
         name: "Our Process",
         slug: "our-process",
         content:
-          "Our process is structured, transparent, and repeatable. We begin with client profiling — assessing your financial goals, risk tolerance, and investment horizon. Capital is then allocated to a tailored strategy aligned to your objectives. Our team continuously monitors and adjusts positions with strict risk controls to ensure capital preservation remains a priority. Clients receive clear, regular updates on portfolio performance.",
+          "We believe investing should feel clear, transparent, and well-supported from the very beginning. Our process is designed to make it easy to get started, while ensuring your portfolio is tailored, professionally managed, and aligned to your long-term goals.",
         heroImage:
           "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=1400&q=80",
         timelineImages: [
@@ -96,42 +221,33 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80",
-      },
-      {
-        name: "Experts",
-        slug: "experts",
-        content:
-          "Our team brings together expertise across trading, portfolio management, and financial markets. We operate in a high-performance environment focused on accountability, precision, and results. Every decision is backed by data, experience, and disciplined execution.",
-        heroImage:
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80",
-        timelineImages: [
-          "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
-          "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80",
-          "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
-        ],
-        contactImage:
-          "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
-      },
-      {
-        name: "Our Offices",
-        slug: "our-offices",
-        content:
-          "StonePeak Partners operates from the UK, serving clients both domestically and internationally. Our infrastructure enables seamless access to global markets while maintaining strict regulatory standards.",
-        heroImage:
-          "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=1400&q=80",
-        timelineImages: [
-          "https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?w=600&q=80",
-          "https://images.unsplash.com/photo-1444723121867-7a241cacace9?w=600&q=80",
-          "https://images.unsplash.com/photo-1480714378408-67cf0d13bc1b?w=600&q=80",
-        ],
-        contactImage:
-          "https://images.unsplash.com/photo-1493246507139-91e8fad9978e?w=800&q=80",
+        fullContent: `
+A simple, structured approach to investing
+
+We believe investing should feel clear, transparent, and well-supported from the very beginning. Our process is designed to make it easy to get started, while ensuring your portfolio is tailored, professionally managed, and aligned to your long-term goals.
+
+Step 1: Initial consultation — We begin by working closely with you to understand your financial goals and objectives, your investment time horizon, your attitude to risk, and any income requirements or specific preferences (including responsible investing).
+
+Step 2: Portfolio design — Based on your requirements, we design a portfolio tailored specifically to you. This includes selecting an appropriate investment strategy, structuring your portfolio for growth, income, or a blend of both, incorporating tax-efficient solutions where appropriate, and aligning investments with your personal preferences and values.
+
+Step 3: Opening your account — Once you're happy to proceed, we'll open your managed investment account. Your account is established in your name, assets are held securely within our custody framework, and we take care of the administration and implementation. Your eligible investments are protected by the Financial Services Compensation Scheme (FSCS) up to £120,000 per account.
+
+Step 4: Funding your portfolio — You can fund your account via lump sum investments, phased investments to manage market timing, or transfers from existing portfolios or platforms.
+
+Step 5: Ongoing management — Once your portfolio is in place, we actively manage it on your behalf. This includes continuous monitoring of performance and risk, making adjustments in response to market conditions, rebalancing the portfolio when appropriate, and managing income payments where required.
+
+Step 6: Reporting and access — You'll have complete transparency over your investments through a secure online portal with 24/7 access, real-time portfolio valuations and holdings, regular performance reports and updates, and quarterly valuations and tax documentation.
+
+Step 7: Ongoing support — You'll have direct access to your investment manager and support team for portfolio reviews, adjustments based on life changes or new objectives, and ongoing guidance and insight. As your circumstances evolve, your portfolio evolves with you.
+
+Start your investment journey with confidence.
+        `,
       },
       {
         name: "Careers",
         slug: "careers",
         content:
-          "We are always looking for driven individuals with a passion for markets. At StonePeak Partners, you will work alongside experienced professionals, gain exposure to live trading environments, and be rewarded based on performance. We value ambition, discipline, and results.",
+          "At StonePeak Partners, we offer the opportunity to work in a fast-paced, high-conviction environment at the centre of global financial markets. We are a results-focused, performance-led investment firm managing over £300 million in client capital. Our culture is built on accountability, precision, meritocracy, and continuous improvement.",
         heroImage:
           "https://images.unsplash.com/photo-1521791136064-7986c2920216?w=1400&q=80",
         timelineImages: [
@@ -141,57 +257,63 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80",
+        fullContent: `
+Build Your Career at StonePeak Partners
+
+Join a performance-driven investment firm where talent, discipline, and ambition are rewarded.
+
+At StonePeak Partners, we offer the opportunity to work in a fast-paced, high-conviction environment at the centre of global financial markets.
+
+A Different Kind of Investment Firm
+
+We are not a traditional organisation. We are a results-focused, performance-led investment firm managing over £300 million in client capital.
+
+Our culture is built on accountability, precision, meritocracy, and continuous improvement. Every individual at StonePeak Partners contributes directly to the firm's success.
+
+Why Join StonePeak
+
+Performance-Based Culture — We reward outcomes, not tenure. Your progression is determined by your impact, not hierarchy.
+
+Exposure to Real Markets — From day one, you will gain exposure to live trading environments, real capital, and active decision-making.
+
+Lean, High-Calibre Team — Work alongside driven professionals in a focused, collaborative setting without unnecessary bureaucracy.
+
+Career Acceleration — We provide a platform for rapid development for individuals who demonstrate discipline, consistency, and results.
+
+Our Teams
+
+Investment & Portfolio Management — Portfolio Managers, Equity Traders, Analysts (Fundamental & Technical), Risk Analysts.
+
+Infrastructure & Operations — Operations Analysts, Trade Support, Systems & Technology Specialists, Compliance & Risk Operations.
+
+Client Services & Administration — Client Relationship Managers, Onboarding Specialists, Administrative Support, Investor Communications.
+
+Business Development & Growth — Business Development Managers, Investor Relations, Strategic Partnerships.
+
+Working at StonePeak
+
+Our office is based in West London, providing access to a dynamic financial and professional network. We offer competitive, performance-linked compensation structures aligned with individual and firm success.
+
+We believe diverse perspectives lead to better decisions and are committed to creating an environment where individuals from all backgrounds can perform at their best.
+
+Apply Now — If you are driven, disciplined, and motivated to succeed in financial markets, we would like to hear from you.
+        `,
       },
-    ],
-  },
-  {
-    category: "Tools & Resources",
-    links: [
-      {
-        name: "Resource Centre",
-        slug: "resource-centre",
-        content:
-          "Stay informed with market commentary, strategy updates, and economic insights. Our resources are designed to help clients understand the thinking behind our decisions and keep up to date with the latest developments across global markets.",
-        heroImage:
-          "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=1400&q=80",
-        timelineImages: [
-          "https://images.unsplash.com/photo-1507842217343-583bb7270b66?w=600&q=80",
-          "https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=600&q=80",
-          "https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&q=80",
-        ],
-        contactImage:
-          "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=800&q=80",
-      },
-      {
-        name: "Education & Engagement",
-        slug: "education-and-engagement",
-        content:
-          "We provide educational content covering market fundamentals, risk management, trading strategies, and portfolio construction. Our goal is to empower clients to make informed financial decisions with confidence.",
-        heroImage:
-          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=1400&q=80",
-        timelineImages: [
-          "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?w=600&q=80",
-          "https://images.unsplash.com/photo-1558008258-3256797b43f3?w=600&q=80",
-          "https://images.unsplash.com/photo-1491975474562-1f4e30bc9468?w=600&q=80",
-        ],
-        contactImage:
-          "https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=800&q=80",
-      },
-      {
-        name: "Ways to Invest",
-        slug: "ways-to-invest",
-        content:
-          "We offer multiple ways to access our strategies, including managed accounts, discretionary portfolios, and tailored investment mandates. Our managed account service allows clients to retain full ownership of their capital while benefiting from our active management expertise. Minimum investment thresholds apply.",
-        heroImage:
-          "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=1400&q=80",
-        timelineImages: [
-          "https://images.unsplash.com/photo-1579532537598-459ecdaf39cc?w=600&q=80",
-          "https://images.unsplash.com/photo-1559526324-593bc073d938?w=600&q=80",
-          "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=600&q=80",
-        ],
-        contactImage:
-          "https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=800&q=80",
-      },
+      // {
+      //   name: "Experts",
+      //   slug: "experts",
+      //   content:
+      //     "Our team brings together expertise across trading, portfolio management, and financial markets. We operate in a high-performance environment focused on accountability, precision, and results. Every decision is backed by data, experience, and disciplined execution.",
+      //   heroImage:
+      //     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=1400&q=80",
+      //   timelineImages: [
+      //     "https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=600&q=80",
+      //     "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&q=80",
+      //     "https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=600&q=80",
+      //   ],
+      //   contactImage:
+      //     "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=800&q=80",
+      // },
     ],
   },
   {
@@ -201,7 +323,7 @@ export const FOOTER_DATA = [
         name: "Latest Insights",
         slug: "latest-insights",
         content:
-          "Our latest insights cover active trading expertise, macroeconomic trends, and market opportunities across global equity markets. We combine fundamental analysis with technical indicators to keep clients ahead of evolving market conditions.",
+          "The global investment landscape in 2026 is being shaped by a powerful combination of structural growth and heightened uncertainty. Global growth remains resilient but subdued, with forecasts broadly around 2.7%–3.1%. Against this backdrop, investors are increasingly recognising that uncertainty is not cyclical—it is structural.",
         heroImage:
           "https://images.unsplash.com/photo-1611974789855-9c2a0a7236a3?w=1400&q=80",
         timelineImages: [
@@ -211,12 +333,45 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1504711434969-e33886168f5c?w=800&q=80",
+        fullContent: `
+Navigating a world defined by change
+
+The global investment landscape in 2026 is being shaped by a powerful combination of structural growth and heightened uncertainty.
+
+Global growth remains resilient but subdued, with forecasts broadly around 2.7%–3.1%, reflecting steady expansion but below long-term averages. At the same time, geopolitical tensions—particularly in energy-sensitive regions—are introducing volatility, impacting supply chains, inflation, and investor confidence.
+
+Against this backdrop, investors are increasingly recognising that uncertainty is not cyclical—it is structural.
+
+The rise of real assets and infrastructure
+
+As traditional markets face pressure from inflation, interest rate constraints, and geopolitical risk, capital is shifting towards assets with tangible, long-term value.
+
+Infrastructure sits at the centre of this transition. Demand is accelerating across energy systems, digital networks, and transport—driven by electrification, AI adoption, and global connectivity. In fact, data centres and digital infrastructure are expected to account for a significant share of future power demand growth.
+
+At the same time, infrastructure investment cycles are lengthening, reflecting a more patient, long-term approach to value creation.
+
+For investors, this creates opportunities to access stable cash flows, inflation-linked income, and diversification beyond traditional asset classes.
+
+The role of bespoke portfolio management
+
+In a more complex environment, portfolio construction has become increasingly important.
+
+A one-size-fits-all approach is no longer sufficient. Investors require portfolios that are actively managed, diversified across asset classes, and aligned to specific objectives—whether that is growth, income, or capital preservation.
+
+Through our Bespoke Portfolio Service, we integrate infrastructure, traditional assets, and alternative investments into a single, tailored strategy—designed to adapt as markets and client needs evolve.
+
+Looking ahead
+
+The defining theme for investors is clear: resilience through diversification, discipline, and long-term thinking.
+
+In a world of constant change, the ability to access the right opportunities—and manage risk effectively—has never been more important.
+        `,
       },
       {
         name: "Market Commentary",
         slug: "market-commentary",
         content:
-          "Regular analysis on global market conditions, liquidity trends, and macroeconomic developments. Our commentary is designed to help clients understand the forces shaping their portfolios and the decisions we make in response.",
+          "Financial markets are entering a new phase—characterised by slower growth, higher structural inflation, and increased geopolitical influence. While developed economies remain broadly stable, growth is uneven. Central banks are navigating a delicate balance between controlling inflation and supporting growth, limiting their flexibility.",
         heroImage:
           "https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?w=1400&q=80",
         timelineImages: [
@@ -226,12 +381,47 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1560221328-12fe60f83ab8?w=800&q=80",
+        fullContent: `
+Markets in transition
+
+Financial markets are entering a new phase—characterised by slower growth, higher structural inflation, and increased geopolitical influence.
+
+While developed economies remain broadly stable, growth is uneven. The US continues to show resilience, supported by consumption and investment in technology, while Europe and parts of Asia face more subdued momentum.
+
+At the same time, central banks are navigating a delicate balance between controlling inflation and supporting growth, limiting their flexibility.
+
+Geopolitics as a market driver
+
+Geopolitical dynamics are now a central force in market performance.
+
+Energy supply disruptions, trade fragmentation, and regional conflicts are influencing everything from commodity prices to capital flows. These dynamics are contributing to higher volatility—and reinforcing the importance of diversification across regions and asset classes.
+
+Infrastructure as a stabilising force
+
+In this environment, infrastructure is increasingly viewed as a source of stability.
+
+Assets such as utilities, energy networks, and transport systems provide essential services with predictable demand. Many benefit from regulated or contracted revenue streams, helping to mitigate market volatility.
+
+At the same time, structural investment is accelerating—particularly in power infrastructure, where rising demand from AI, electrification, and digitalisation is driving long-term capital deployment.
+
+Evolving sustainable investing
+
+Sustainable investing continues to mature, with a greater focus on measurable outcomes and real-world impact.
+
+Investors are moving beyond broad exclusions towards more targeted approaches—prioritising areas such as energy transition, resource efficiency, and social infrastructure. This shift reflects a more nuanced understanding of risk, return, and long-term value creation.
+
+Our perspective
+
+We believe successful investing today requires active management and flexibility, exposure to real assets and infrastructure, a disciplined approach to risk, and alignment with long-term structural trends.
+
+Our role is to navigate this complexity—helping clients remain focused on long-term outcomes, not short-term noise.
+        `,
       },
       {
         name: "Secular Outlook",
         slug: "secular-outlook",
         content:
-          "Our secular outlook provides a long-term perspective on global markets, structural investment themes, and the macroeconomic forces that shape multi-year performance cycles. We believe disciplined, high-conviction investing produces superior compounding results over time.",
+          "Beyond short-term market movements, a set of powerful secular trends is reshaping the global economy—and creating long-term investment opportunities. These trends form the foundation of our investment approach, from digitalisation and data infrastructure to energy transition and global infrastructure demand.",
         heroImage:
           "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1400&q=80",
         timelineImages: [
@@ -241,6 +431,59 @@ export const FOOTER_DATA = [
         ],
         contactImage:
           "https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=800&q=80",
+        fullContent: `
+Investing in long-term change
+
+Beyond short-term market movements, a set of powerful secular trends is reshaping the global economy—and creating long-term investment opportunities.
+
+These trends form the foundation of our investment approach.
+
+Digitalisation and data infrastructure
+
+The rapid expansion of artificial intelligence, cloud computing, and digital connectivity is transforming economies.
+
+This is driving unprecedented demand for data centres, fibre networks, and power infrastructure—creating long-term investment opportunities across digital and energy systems.
+
+As demand for data and connectivity continues to grow, the infrastructure supporting it becomes increasingly critical—and increasingly valuable.
+
+Energy transition and electrification
+
+The global shift towards cleaner, more efficient energy systems is one of the defining investment themes of our time.
+
+This transition requires significant investment across renewable energy, grid infrastructure, storage, and transitional energy sources. At the same time, rising electricity demand—from AI, electric vehicles, and industrial electrification—is reinforcing the need for resilient, scalable energy systems.
+
+Infrastructure sits at the centre of this transformation.
+
+Global infrastructure demand
+
+The need for infrastructure investment extends far beyond developed markets.
+
+Across emerging economies, demand for transport, energy, water, and communications infrastructure continues to grow—driven by population expansion, urbanisation, and economic development.
+
+At the same time, global investment gaps remain significant, highlighting the scale of opportunity for long-term investors.
+
+Sustainability and responsible investing
+
+Sustainability is evolving from a thematic consideration to a core investment principle.
+
+Investors are increasingly focused on aligning portfolios with long-term environmental and social outcomes—while maintaining strong financial discipline.
+
+The role of bespoke portfolios
+
+Capturing these long-term trends requires more than access—it requires integration.
+
+Through our Bespoke Portfolio Service, we build portfolios that combine infrastructure and real assets, traditional equities and fixed income, and sustainable and thematic investments.
+
+This allows us to position portfolios for long-term structural change—while maintaining balance, diversification, and risk control.
+
+A long-term perspective
+
+Markets will fluctuate. Cycles will come and go.
+
+But the underlying drivers of growth—technology, energy, infrastructure, and sustainability—will continue to shape the future.
+
+Our focus is on identifying these trends early, investing with discipline, and helping clients benefit from the opportunities they create.
+        `,
       },
     ],
   },
