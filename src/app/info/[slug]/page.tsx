@@ -136,7 +136,7 @@ export default async function InfoPage({ params }: any) {
               },
               {
                 Icon: Users,
-                stat: "0% Mgmt Fee",
+                stat: "0% management Fee",
                 sub: "Performance fee of 20% on profits only. We only earn when you do.",
               },
             ].map(({ Icon, stat, sub }, i) => (
