@@ -60,8 +60,7 @@ export function Footer() {
         {/* LEGAL DISCLOSURES & BOTTOM LINKS */}
         <div className="space-y-6 text-[11px] leading-relaxed text-zinc-500 max-w-5xl">
           <p>
-            © 2026 Stonepeak Partners Global Infrastructure. All rights
-            reserved.{" "}
+            © 2026 All rights reserved.{" "}
             <span className="text-zinc-200 font-semibold">
               Stonepeak Partners (UK) LLP
             </span>{" "}
@@ -75,11 +74,7 @@ export function Footer() {
           <p>
             <b className="text-zinc-400">Professional Investors Only.</b> This
             website is intended for professional investors as defined by local
-            jurisdiction in the{" "}
-            <span className="text-zinc-300">
-              United Arab Emirates (ex ADGM)
-            </span>
-            . Past performance is not a guarantee of future results.
+            jurisdiction. Past performance is not a guarantee of future results.
           </p>
 
           <div className="flex flex-wrap gap-x-6 gap-y-2 font-bold uppercase tracking-widest pt-4">
