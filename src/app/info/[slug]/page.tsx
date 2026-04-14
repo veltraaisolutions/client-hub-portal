@@ -828,13 +828,13 @@ function CareersLayout({ pageData }: { pageData: any }) {
             If you are driven, disciplined, and motivated to succeed in
             financial markets, we would like to hear from you.
           </p>
-          <a
+          {/* <a
             href="#"
             className="inline-flex items-center gap-2 font-bold text-sm px-10 py-4"
             style={{ background: "#1d4ed8", color: "white" }}
           >
             Submit Application <ArrowUpRight size={15} />
-          </a>
+          </a> */}
         </div>
       </section>
 
