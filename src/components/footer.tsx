@@ -49,12 +49,6 @@ export function Footer() {
               Stonepeak Partners
             </span>
           </div>
-          <div className="flex items-center gap-6 text-xs font-bold tracking-widest uppercase text-zinc-400">
-            <div className="flex items-center gap-2 cursor-pointer hover:text-white transition-colors">
-              <Globe className="h-4 w-4" />
-              United Arab Emirates (ex ADGM)
-            </div>
-          </div>
         </div>
 
         {/* LEGAL DISCLOSURES & BOTTOM LINKS */}
